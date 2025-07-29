@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { type PageContextType, type Pages } from "@/context/PageContext";
 
 
 const StyledHeaderButton = styled.button`
@@ -7,8 +6,8 @@ const StyledHeaderButton = styled.button`
   padding: 10px;
   border-radius: 2rem;
   cursor: pointer;
-  transition: all 0.5s ease;
-  background-color: ${({ theme }) => theme.colors.primary};
+  transition: all 0.2s ease;
+  /* background-color: ${({ theme }) => theme.colors.primary}; */
   
   &:hover {
     background-color: ${({ theme }) => theme.colors.secondary};
@@ -23,15 +22,9 @@ const StyledHeaderButton = styled.button`
   }
 `;
 
-interface NavButtonProps extends PageContextType{
-  page: Pages;
-}
-
-export default function NavBetton({ page, currentPage, setCurrentPage }: NavButtonProps) {
+export default function NavBetton({ page }: {page: string}) {
   return (
   <StyledHeaderButton
-    onClick={() => setCurrentPage(page)}
-    disabled={currentPage === page}
   >
     {page}
   </StyledHeaderButton>

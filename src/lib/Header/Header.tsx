@@ -1,6 +1,5 @@
 import styled from "styled-components";
-import { usePage } from "@/context/PageContext";
-import NavButton from "./PageButton"; // Предполагая, что вынесли в отдельный файл
+import NavButton from "./PageButton";
 
 const HeaderContainer = styled.header`
   height: 4rem;
@@ -15,24 +14,19 @@ const HeaderContainer = styled.header`
 `;
 
 export default function Header() {
-  const { currentPage, setCurrentPage } = usePage();
-
   return (
     <HeaderContainer>
       <NavButton 
-        page="home" 
-        currentPage={currentPage} 
-        setCurrentPage={setCurrentPage} 
+        page="обо мне" 
       />
       <NavButton 
-        page="works" 
-        currentPage={currentPage} 
-        setCurrentPage={setCurrentPage} 
+        page="проекты"
       />
       <NavButton 
-        page="some" 
-        currentPage={currentPage} 
-        setCurrentPage={setCurrentPage} 
+        page="навыки"
+      />
+      <NavButton 
+        page="контакты"
       />
     </HeaderContainer>
   );

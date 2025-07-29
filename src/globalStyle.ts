@@ -33,9 +33,9 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
   }
   
   body {
+    transition: all 0.4s ease;
     background-color: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
-    transition: all 0.2s ease;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -52,4 +52,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
     right: 20px;
     z-index: 1000;
   }
+
+  
 `;
+

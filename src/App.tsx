@@ -1,25 +1,31 @@
-import { useState } from 'react';
-import { ThemeProvider, type DefaultTheme } from 'styled-components';
-import { PageProvider } from './context/PageContext';
+import { useState, useMemo } from 'react';
+import { ThemeProvider } from 'styled-components';
 import { darkTheme, GlobalStyles, lightTheme } from './globalStyle';
 import Header from '@lib/Header/Header';
+import PageContent from '@lib/PageContent/PageContent';
+import ParticlesBackground from '@lib/ParticlesBackground/ParticlesBackground';
 
 function App() {
-  const [theme, setTheme] = useState<DefaultTheme>(lightTheme);
+  const [themeName, setThemeName] = useState<'light' | 'dark'>('light');
+  
+  const theme = useMemo(() => 
+    themeName === 'light' ? lightTheme : darkTheme, [themeName]);
   
   const toggleTheme = () => {
-    setTheme(theme === lightTheme ? darkTheme : lightTheme);
+    setThemeName(prev => prev === 'light' ? 'dark' : 'light');
   };
 
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles theme={theme}/>
-      <PageProvider>
+      <ParticlesBackground/>
+      <div style={{ position: 'relative', zIndex: 1 }}>
         <button className='theme-button' onClick={toggleTheme}>
-          {theme.themeName === 'light' ? 'dark' : 'light'}
-        </button>
+           {theme.themeName === 'light' ? 'dark' : 'light'}
+         </button>
         <Header />
-      </PageProvider>
+        <PageContent />
+      </div>
     </ThemeProvider>
   );
 }
