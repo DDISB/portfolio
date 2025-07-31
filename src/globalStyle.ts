@@ -53,6 +53,15 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
     z-index: 1000;
   }
 
-  
-`;
+  .progress-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 1;
+    background: ${({ theme }) => theme.colors.contrast};
+    transform-origin: 0%;
+}
 
+`;
