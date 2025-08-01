@@ -1,5 +1,4 @@
-
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { type Container, type ISourceOptions } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
@@ -7,7 +6,9 @@ import { useTheme } from 'styled-components';
 
 export default function ParticlesBackground() {
   const theme = useTheme();
-  
+
+  const [init, setInit] = useState(false);
+
   const options: ISourceOptions = useMemo(() => ({
     autoPlay: true,
     background: {
@@ -82,7 +83,6 @@ export default function ParticlesBackground() {
     }
   }), [theme]);
 
-  const [init, setInit] = useState(false);
 
   useEffect(() => {
     initParticlesEngine(async (engine) => {
@@ -92,20 +92,19 @@ export default function ParticlesBackground() {
     });
   }, []);
 
-  type ParticlesContainer = Container & {
-    options: {
-      update: (options: ISourceOptions) => Promise<void>;
-    };
+  const particlesLoaded = async (container?: Container): Promise<void> => {
+    // console.log(container);
   };
 
-  const particlesLoaded = useCallback(async (container?: Container) => {
-    if (container) {
-      const typedContainer = container as ParticlesContainer;
-      await typedContainer.options.update(options);
-    }
-  }, [options]);
-
-  if (!init) return null;
+  if (init) {
+    return (
+      <Particles
+        id="tsparticles"
+        particlesLoaded={particlesLoaded}
+        options={options}
+      />
+    );
+  }
 
   return (
     <Particles
