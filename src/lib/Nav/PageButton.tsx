@@ -7,7 +7,7 @@ interface Props {
 
 const StyledHeaderButton = styled.button`
     border: 0px;
-    padding: 10px;
+    padding: 1rem 1rem;
     border-radius: 2rem;
     cursor: pointer;
     transition: all 0.5s ease;

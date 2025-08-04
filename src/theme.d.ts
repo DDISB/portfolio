@@ -8,6 +8,7 @@ declare module 'styled-components' {
       contrast: string;
       primary: string;
       secondary: string;
+      headerBackground: string;
       text: string;
     };
   }
