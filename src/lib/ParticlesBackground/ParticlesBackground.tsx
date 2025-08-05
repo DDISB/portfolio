@@ -3,17 +3,19 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { type Container, type ISourceOptions } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 import { useTheme } from 'styled-components';
+import { div } from 'framer-motion/client';
 
 export default function ParticlesBackground() {
   const theme = useTheme();
 
   const [init, setInit] = useState(false);
 
+  // const options: ISourceOptions = useMemo(() => ({autoPlay: true,}), []);
   const options: ISourceOptions = useMemo(() => ({
     autoPlay: true,
     background: {
       color: {
-        value: theme.colors.background // Используем цвет из темы
+        value: '#0000000'
       },
     },
     fullScreen: {
@@ -42,7 +44,7 @@ export default function ParticlesBackground() {
     },
     particles: {
       color: {
-        value: theme.colors.text // Цвет частиц из темы
+        value: theme.colors.text
       },
       move: {
         enable: true,
@@ -96,21 +98,8 @@ export default function ParticlesBackground() {
     // console.log(container);
   };
 
-  if (init) {
-    return (
-      <Particles
-        id="tsparticles"
-        particlesLoaded={particlesLoaded}
-        options={options}
-      />
-    );
-  }
-
   return (
-    <Particles
-      id="tsparticles"
-      particlesLoaded={particlesLoaded}
-      options={options}
+    <div 
       style={{
         position: 'fixed',
         top: 0,
@@ -118,8 +107,14 @@ export default function ParticlesBackground() {
         width: '100%',
         height: '100%',
         zIndex: 0,
-        transition: 'background-color 0.4s ease' // Плавное изменение
+        transition: 'background-color 0.4s ease'
       }}
-    />
+    >
+      <Particles
+        id="tsparticles"
+        particlesLoaded={particlesLoaded}
+        options={options}      
+      />
+    </div>
   );
 }

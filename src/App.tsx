@@ -22,9 +22,7 @@ export default function App() {
     themeName === 'dark' ? lightTheme : darkTheme, [themeName]);
 
   const toggleTheme = () => {
-    const scrollPosition = window.scrollY;
     setThemeName(prev => prev === 'light' ? 'dark' : 'light');
-    setTimeout(() => window.scrollTo(0, scrollPosition), 0);
   };
 
   return (
