@@ -1,6 +1,6 @@
 import { useRef } from 'react';
 import { sections } from '../Nav/sections';
-import { Intro, About, Projects, Skills, Contacts } from './Sections';
+import { Intro, About, Works, Skills, Contacts } from './Sections';
 import styled from "styled-components";
 
 const ContentContainer = styled.div`
@@ -36,8 +36,8 @@ export default function PageContent() {
         <About />
       </Section>
 
-      <Section ref={section2Ref}  id={sections.projects}>
-        <Projects />
+      <Section ref={section2Ref}  id={sections.works}>
+        <Works />
       </Section>
 
       <Section ref={section2Ref}  id={sections.skills}>

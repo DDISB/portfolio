@@ -3,23 +3,25 @@ import { createGlobalStyle, type DefaultTheme } from 'styled-components';
 export const lightTheme: DefaultTheme = {
   themeName: 'light',
   colors: {
-    background: '#f0f4f8',
-    primary: '#ffffff',
-    secondary:'#ffffffff',
-    headerBackground:'#ffffff7c',
-    contrast:'#000',
-    text: '#333333',
+    background: '#dfe9ffff',
+    primary: '#198cff',
+    secondary: '#eff7ffff',
+    headerBackground: '#ffffff',
+    contrast: '#000000',
+    additional: '#ff4c22',
+    text: '#031a31',
   },
 };
 
 export const darkTheme: DefaultTheme = {
   themeName: 'dark',
   colors: {
-    background: '#121212',
-    primary: '#121212',
-    secondary: '#333333',
-    headerBackground: '#1212127c',
+    background: '#28344b',
+    primary: '#031a31',
+    secondary: '#2f4456',
+    headerBackground: '#28344b',
     contrast: '#fff',
+    additional: '#ff4c22',
     text: '#f5f5f5',
   },
 };
@@ -54,9 +56,19 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
   }
 
   h2 {
+    font-size: 3rem;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+
+  h3 {
     font-size: 2rem;
     line-height: 1.1;
     font-weight: 700;
+  }
+
+  a {
+    color: ${({ theme }) => theme.colors.text};
   }
   
   .theme-button {

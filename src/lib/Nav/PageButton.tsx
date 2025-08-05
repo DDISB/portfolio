@@ -10,13 +10,13 @@ const StyledHeaderButton = styled.button`
     padding: 1rem 1rem;
     border-radius: 2rem;
     cursor: pointer;
-    transition: all 0.5s ease;
 
     transform: translateY(0);
     
     &:hover {
       background-color: ${({ theme }) => theme.colors.secondary};
       transform: translateY(-2px);
+      transition: all 0.4s ease;
     }
   `;
 

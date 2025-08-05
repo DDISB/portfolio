@@ -1,6 +1,6 @@
 export const sections = {
   about: 'about',
-  projects: 'projects',
+  works: 'works',
   skills: 'skills',
   contacts: 'contacts'
 } as const;

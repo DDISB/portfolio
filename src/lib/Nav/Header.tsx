@@ -17,7 +17,6 @@ const HeaderContainer = styled.header`
 const HeaderContent = styled.div`
   margin: 0 1rem ;
   min-height: 100%;
-  /* height: 100%; */
   border: solid 1px ${({ theme }) => theme.colors.secondary};
   border-radius: 2rem;
   background-color: ${({ theme }) => theme.colors.headerBackground};
@@ -38,8 +37,8 @@ export default function Header() {
           sectionId={sections.about}
         />
         <NavButton 
-          text="проекты"
-          sectionId={sections.projects}
+          text="работы"
+          sectionId={sections.works}
         />
         <NavButton 
           text="навыки"

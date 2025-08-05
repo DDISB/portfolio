@@ -3,12 +3,12 @@ import { type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
 export const viewportSettings = {
-  once: false,
+  once: true,
   amount: 0.2
 } as const;
 
 export const viewportContainerSettings = {
-  once: false,
+  once: true,
   amount: 0
 } as const;
 

@@ -5,7 +5,7 @@ const SkillsContainer = styled.div`
   max-width: 800px;
   width: 100%;
   min-height: 400px;
-  /* margin: 0 auto; */
+  margin: 0 auto;
 
   background-color: ${({ theme }) => theme.colors.secondary};
   padding: 1rem;

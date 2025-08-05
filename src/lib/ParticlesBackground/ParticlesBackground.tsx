@@ -3,7 +3,6 @@ import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { type Container, type ISourceOptions } from "@tsparticles/engine";
 import { loadSlim } from "@tsparticles/slim";
 import { useTheme } from 'styled-components';
-import { div } from 'framer-motion/client';
 
 export default function ParticlesBackground() {
   const theme = useTheme();

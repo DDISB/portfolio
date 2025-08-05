@@ -1,9 +1,10 @@
 import { AnimatedLi, AnimatedContainer} from "@/lib/animations/appearanceAnimation";
-import { LiHover } from '@lib/animations/hoverAnimation';
-import styled from "styled-components";
+import styled, { useTheme } from "styled-components";
 import githubSvg from '@/assets/github.svg'
 import telegramSvg from '@/assets/telegram.svg'
 import mailSvg from '@/assets/mail.svg'
+import contactsLight from '@/assets/contactsLight.svg'
+import contactsDark from '@/assets/contactsDark.svg'
 
 const ContactContainer = styled(AnimatedContainer)`
   position: static;
@@ -42,11 +43,21 @@ const Li = styled(AnimatedLi)`
 
   font-weight: 600;
   transform: translateY(0);
+
+  border-right: solid 5px ${({ theme }) => theme.colors.secondary};
+  border-left: solid 5px ${({ theme }) => theme.colors.secondary};
 `;
 
 const Img = styled.img`
   height: 100%;
   background-color: #fff;
+  border-radius: 1rem;
+  padding: 2px;
+`;
+
+const HeaderImg = styled.img`
+  height: 100%;
+  margin-top: 5px;
   border-radius: 1rem;
   padding: 2px;
 `;
@@ -78,9 +89,17 @@ const TextWrapper = styled.div`
 `;
 
 export default function() {
+  const theme = useTheme();
+  const LiHover = {
+    borderRight: `solid 5px ${theme.colors.additional}`,
+    borderLeft: `solid 5px ${theme.colors.additional}`,
+    y: -4,
+  }
   return (
     <ContactContainer>
-      <h2> Мои контакты</h2>
+      <h2>
+        <HeaderImg src={theme.themeName === 'light' ? contactsLight : contactsDark } alt="" /> Мои контакты
+      </h2>
 
       <Ul>
         <Li whileHover={LiHover}>
