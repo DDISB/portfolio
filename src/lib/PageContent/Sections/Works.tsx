@@ -12,7 +12,6 @@ const ProjectsContainer = styled(AnimatedContainer)`
   min-height: 400px;
   margin: 0 auto;
 
-  padding: 2rem;
   border-radius: 1rem;
   
   display: flex;
@@ -26,14 +25,12 @@ const Ul = styled.ul`
   flex-direction: column;
   align-items: center;
   gap: 2rem;
-  display: flex;
-  align-items: center;
 
   margin-top: 2rem;
 `;
 
-const Li = styled(AnimatedLi)`
-  height: 20rem;
+const LiLeft = styled(AnimatedLi)`
+  min-height: 20rem;
   width: 100%;
   background-color: ${({ theme }) => theme.colors.secondary};
   box-shadow: 5px 5px 1rem #0000006b;
@@ -45,7 +42,38 @@ const Li = styled(AnimatedLi)`
   transform: translateY(0);
 
   display: flex;
+  align-items: flex-start;
   gap: 2rem;
+
+  @media (max-width: 1000px) {
+    height: max-content;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+`;
+
+const LiRight = styled(AnimatedLi)`
+  min-height: 20rem;
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.secondary};
+  box-shadow: 5px 5px 1rem #0000006b;
+
+  border-radius: 1rem;
+  padding: 1rem;
+
+  font-weight: 600;
+  transform: translateY(0);
+
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: flex-start;
+  gap: 2rem;
+
+  @media (max-width: 1000px) {
+    height: max-content;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 `;
 
 const HeaderImg = styled.img`
@@ -53,18 +81,22 @@ const HeaderImg = styled.img`
 `;
 
 const Img = styled.img`
-  height: 100%;
-  /* border-radius: 1rem; */
-  /* padding: 1px; */
+  max-width: 60%;
+  object-fit: contain;
+  @media (max-width: 1000px) {
+    height: max-content;
+    max-width: 100%;
+  }
 `;
 
 const DesciptionContainer = styled.div`
-  width: 100%;
+  flex-grow: 1;
   height: 100%;
   border-radius: 1rem;
   padding: 1rem;
 
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   justify-content: space-between;
 `;
@@ -116,6 +148,9 @@ const ColoredP = styled.p`
 
 export default function() {
   const theme = useTheme();
+  const LiHover = {
+    y: -4,
+  }
 
   return (
     <ProjectsContainer>
@@ -124,7 +159,7 @@ export default function() {
       </h2>
 
       <Ul>
-        <Li>
+        <LiLeft whileHover={LiHover}>
           <Img src={brando} alt="works-svg"></Img>
           <DesciptionContainer>
             <Desciption>
@@ -137,10 +172,12 @@ export default function() {
               <AButton href="https://ddisb.github.io/Stainless-Hackathon/">Демо</AButton>
             </LinkContainer>
           </DesciptionContainer>
-        </Li>
-        <Li>
+        </LiLeft>
+        
+        <LiRight whileHover={LiHover}>
+          <Img src={boldo} alt="works-svg"></Img>
           <DesciptionContainer>
-              <ColoredP>&mdash; Одностраничный лэндинг </ColoredP>
+            <ColoredP>&mdash; Одностраничный лэндинг </ColoredP>
             <Desciption>
               <h3>Boldo </h3>
               <P>Boldo - это одностраничный лэндинг написанный и использованием HTML, CSS и JavaScript. Представляет собой страницу в строгом дизайне, а так же поддерживает адаптивную верстку для устройств с разным размером экранов.</P>
@@ -150,8 +187,7 @@ export default function() {
               <AButton href="https://ddisb.github.io/Boldo.github.io/">Демо</AButton>
             </LinkContainer>
           </DesciptionContainer>
-          <Img src={boldo} alt="works-svg"></Img>
-        </Li>
+        </LiRight>
       </Ul>
     </ProjectsContainer>
   );

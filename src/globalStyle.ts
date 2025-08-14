@@ -28,14 +28,14 @@ export const darkTheme: DefaultTheme = {
 
 export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
   #root {
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: start;
-    width: 100%;
-    font-size: 16px;
-  }
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      width: 100%;
+      font-size: 16px;
+    }
   
   body {
     margin: 0;
@@ -53,7 +53,9 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
   h1 {
     font-size: 3.2em;
     line-height: 1.1;
+    font-weight: 600;
   }
+
 
   h2 {
     font-size: 3rem;
@@ -94,4 +96,9 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
     transform-origin: 0%;
 }
 
+  @media (max-width: 600px) {
+    h2 {
+      font-size: 2rem;
+    }
+  }
 `;

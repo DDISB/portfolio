@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import { darkTheme, GlobalStyles, lightTheme } from './globalStyle';
 import { motion, useScroll, useSpring } from "framer-motion";
@@ -8,7 +8,12 @@ import ParticlesBackground from '@lib/ParticlesBackground/ParticlesBackground';
 import useWindowWidth from '@lib/hooks/useWindowWidth';
 
 export default function App() {
-  const [themeName, setThemeName] = useState<'light' | 'dark'>('light');
+  // Инициализируем тему из localStorage или используем 'light' по умолчанию
+  const [themeName, setThemeName] = useState<'light' | 'dark'>(() => {
+    const savedTheme = localStorage.getItem('theme');
+    return (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : 'light';
+  });
+  
   const width = useWindowWidth();
   
   const { scrollYProgress } = useScroll();
@@ -19,11 +24,18 @@ export default function App() {
   });
   
   const theme = useMemo(() => 
-    themeName === 'dark' ? lightTheme : darkTheme, [themeName]);
+    themeName === 'dark' ? darkTheme : lightTheme, [themeName]);
 
   const toggleTheme = () => {
-    setThemeName(prev => prev === 'light' ? 'dark' : 'light');
+    const newTheme = themeName === 'light' ? 'dark' : 'light';
+    setThemeName(newTheme);
+    localStorage.setItem('theme', newTheme);
   };
+
+  // Синхронизация темы при первом рендере
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', themeName);
+  }, [themeName]);
 
   return (
     <>
@@ -33,12 +45,12 @@ export default function App() {
         <ParticlesBackground/>
         <div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
           <button className='theme-button' onClick={toggleTheme}>
-            {theme.themeName === 'light' ? 'dark' : 'light'}
+            {themeName === 'light' ? 'dark' : 'light'}
           </button>
           {width > 600 && <Header />}
           <PageContent />
         </div>
-    </ThemeProvider>
+      </ThemeProvider>
     </>
   );
 }

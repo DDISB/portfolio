@@ -1,24 +1,20 @@
 import styled from "styled-components";
 
 const IntroContainer = styled.div`
-  min-height: 90vh;
-  
-  position: static;
-  max-width: 900px;
+  min-height: 90vh;  
   width: 100%;
-  /* margin: 0 auto; */
 
-  padding: 0 1rem;
   margin: 0;
-  border-radius: 1rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default function() {
-
-
   return (
     <IntroContainer>
-      132
+      <h1>Привет, я Самылов Демид</h1>
     </IntroContainer>
   );
 }

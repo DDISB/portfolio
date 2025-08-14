@@ -1,6 +1,6 @@
 import Intro from './Intro'
 import About from './About'
-import Works from './Wroks'
+import Works from './Works'
 import Skills from './Skills'
 import Contacts from './Contacts'
 

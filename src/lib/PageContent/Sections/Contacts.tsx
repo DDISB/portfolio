@@ -5,6 +5,8 @@ import telegramSvg from '@/assets/telegram.svg'
 import mailSvg from '@/assets/mail.svg'
 import contactsLight from '@/assets/contactsLight.svg'
 import contactsDark from '@/assets/contactsDark.svg'
+import useWindowWidth from "@/lib/hooks/useWindowWidth";
+import { useState } from "react";
 
 const ContactContainer = styled(AnimatedContainer)`
   position: static;
@@ -13,7 +15,7 @@ const ContactContainer = styled(AnimatedContainer)`
   min-height: 400px;
   margin: 0 auto;
 
-  padding: 2rem;
+  /* padding: 2rem; */
   border-radius: 1rem;
   
   display: flex;
@@ -44,8 +46,8 @@ const Li = styled(AnimatedLi)`
   font-weight: 600;
   transform: translateY(0);
 
-  border-right: solid 5px ${({ theme }) => theme.colors.secondary};
-  border-left: solid 5px ${({ theme }) => theme.colors.secondary};
+  border-right: solid 5px #00000000 ;
+  border-left: solid 5px #00000000;
 `;
 
 const Img = styled.img`
@@ -59,7 +61,6 @@ const HeaderImg = styled.img`
   height: 100%;
   margin-top: 5px;
   border-radius: 1rem;
-  padding: 2px;
 `;
 
 const A = styled.a`
@@ -72,7 +73,8 @@ const A = styled.a`
   gap: 1rem;
 `;
 
-const DivA = styled.a`
+const EmailContainer = styled.div`
+  cursor: pointer;
   width: 100%;
   height: 100%;
   padding: 1rem;
@@ -85,16 +87,37 @@ const DivA = styled.a`
 const TextWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  gap: 1rem;
   width: 100%; 
+`;
+
+const EmailText = styled.div`
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export default function() {
   const theme = useTheme();
+  const width = useWindowWidth();
   const LiHover = {
     borderRight: `solid 5px ${theme.colors.additional}`,
     borderLeft: `solid 5px ${theme.colors.additional}`,
     y: -4,
   }
+  const [isCopied, setIsCopied] = useState(false);
+
+  const handleCopy = async () => {
+    try {
+      let text: string = 'demidsamylov@gmail.com';
+      await navigator.clipboard.writeText(text);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000); // Сброс статуса через 2 секунды
+    } catch (err) {
+      console.error('Ошибка копирования:', err);
+    }
+  };
   return (
     <ContactContainer>
       <h2>
@@ -106,7 +129,7 @@ export default function() {
           <A href="https://github.com/DDISB">
             <Img src={githubSvg} alt="GitHab logo" />
             <TextWrapper>
-              <p>GitHab</p>
+              {width > 375 && <p>GitHab</p>}
               <p>github.com/DDISB</p>
             </TextWrapper>
           </A>
@@ -116,20 +139,23 @@ export default function() {
           <A href="https://t.me/DemidSamylov">
             <Img src={telegramSvg} alt="Telegram logo" ></Img>
             <TextWrapper>
-              <p>Telegram</p>
+              {width > 375 && <p>Telegram</p>}
               <p>t.me/DemidSamylov</p>
             </TextWrapper>
           </A>
         </Li>
 
         <Li whileHover={LiHover}>
-          <DivA>
+          <EmailContainer onClick={handleCopy}>
             <Img src={mailSvg} alt="Mail logo" ></Img>
             <TextWrapper>
-              <p>Gmail</p>
-              <p>demidsamylov@gmail.com</p>
+              {width > 375 && <p>Gmail</p>}
+              <EmailText>
+                <p>demidsamylov@gmail.com</p>
+                {isCopied && <span style={{ marginLeft: '10px', color: 'green' }}>✓ Скопировано!</span>}
+              </EmailText>
             </TextWrapper>
-          </DivA>
+          </EmailContainer>
         </Li>
       </Ul>
     </ContactContainer>
