@@ -6,6 +6,7 @@ import Header from '@/lib/Nav/Header';
 import PageContent from '@lib/PageContent/PageContent';
 import ParticlesBackground from '@lib/ParticlesBackground/ParticlesBackground';
 import useWindowWidth from '@lib/hooks/useWindowWidth';
+import Footer from './lib/Footer/Footer';
 
 export default function App() {
   // Инициализируем тему из localStorage или используем 'light' по умолчанию
@@ -49,6 +50,7 @@ export default function App() {
           </button>
           {width > 600 && <Header />}
           <PageContent />
+          <Footer />
         </div>
       </ThemeProvider>
     </>

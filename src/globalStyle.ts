@@ -91,7 +91,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
     left: 0;
     right: 0;
     height: 2px;
-    z-index: 2;
+    z-index: 100;
     background: ${({ theme }) => theme.colors.contrast};
     transform-origin: 0%;
 }

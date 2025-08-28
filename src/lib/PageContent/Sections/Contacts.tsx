@@ -58,9 +58,9 @@ const Img = styled.img`
 `;
 
 const HeaderImg = styled.img`
-  height: 100%;
-  margin-top: 5px;
-  border-radius: 1rem;
+  height: 3rem;
+  margin-top: 10px;
+  /* border-radius: 1rem; */
 `;
 
 const A = styled.a`

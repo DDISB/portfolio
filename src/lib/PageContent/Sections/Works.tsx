@@ -77,7 +77,8 @@ const LiRight = styled(AnimatedLi)`
 `;
 
 const HeaderImg = styled.img`
-  height: 100%;
+  margin-top: 5px;
+  height: 3rem;
 `;
 
 const Img = styled.img`

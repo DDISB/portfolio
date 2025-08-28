@@ -4,6 +4,7 @@ import NavButton from "./PageButton";
 
 const HeaderContainer = styled.header`
   position: fixed;
+  z-index: 100;
   top: 1rem;
   left: 0;
   right: 0;
@@ -25,6 +26,7 @@ const HeaderContent = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 0 1rem;
+  box-shadow: 5px 5px 1rem #0000006b;
 `
 
 export default function Header() {
