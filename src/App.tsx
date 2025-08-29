@@ -4,7 +4,6 @@ import { darkTheme, GlobalStyles, lightTheme } from './globalStyle';
 import { motion, useScroll, useSpring } from "framer-motion";
 import Header from '@/lib/Nav/Header';
 import PageContent from '@lib/PageContent/PageContent';
-import ParticlesBackground from '@lib/ParticlesBackground/ParticlesBackground';
 import useWindowWidth from '@lib/hooks/useWindowWidth';
 import Footer from './lib/Footer/Footer';
 
@@ -43,12 +42,11 @@ export default function App() {
       <ThemeProvider theme={theme}>
         <GlobalStyles theme={theme}/>
         <motion.div className="progress-bar" style={{ scaleX }} />
-        <ParticlesBackground/>
         <div style={{ position: 'relative', zIndex: 1, width: '100%' }}>
+          {width > 600 && <Header/>}
           <button className='theme-button' onClick={toggleTheme}>
             {themeName === 'light' ? 'dark' : 'light'}
           </button>
-          {width > 600 && <Header />}
           <PageContent />
           <Footer />
         </div>

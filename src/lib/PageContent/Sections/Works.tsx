@@ -32,8 +32,6 @@ const Ul = styled.ul`
 const LiLeft = styled(AnimatedLi)`
   min-height: 20rem;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.secondary};
-  box-shadow: 5px 5px 1rem #0000006b;
 
   border-radius: 1rem;
   padding: 1rem;
@@ -55,8 +53,6 @@ const LiLeft = styled(AnimatedLi)`
 const LiRight = styled(AnimatedLi)`
   min-height: 20rem;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.secondary};
-  box-shadow: 5px 5px 1rem #0000006b;
 
   border-radius: 1rem;
   padding: 1rem;
@@ -83,6 +79,7 @@ const HeaderImg = styled.img`
 
 const Img = styled.img`
   max-width: 60%;
+  border-radius: 1rem;
   object-fit: contain;
   @media (max-width: 1000px) {
     height: max-content;

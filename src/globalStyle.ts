@@ -3,25 +3,25 @@ import { createGlobalStyle, type DefaultTheme } from 'styled-components';
 export const lightTheme: DefaultTheme = {
   themeName: 'light',
   colors: {
-    background: '#dfe9ffff',
+    background: '#f4f8ffff',
     primary: '#198cff',
-    secondary: '#eff7ffff',
-    headerBackground: '#ffffff',
-    contrast: '#000000',
-    additional: '#ff4c22',
-    text: '#031a31',
+    secondary: '#f4f8ffff',
+    headerBackground: '#00000000',
+    contrast: '#0a0a0b',
+    additional: '#8070f9ff',
+    text: '#0a0a0b',
   },
 };
 
 export const darkTheme: DefaultTheme = {
   themeName: 'dark',
   colors: {
-    background: '#28344b',
-    primary: '#031a31',
-    secondary: '#2f4456',
-    headerBackground: '#28344b',
+    background: '#0a0a0b',
+    primary: '#0a0a0b',
+    secondary: '#0a0a0b',
+    headerBackground: '#00000000',
     contrast: '#fff',
-    additional: '#ff4c22',
+    additional: '#8070f9ff',
     text: '#f5f5f5',
   },
 };
@@ -53,7 +53,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
   h1 {
     font-size: 3.2em;
     line-height: 1.1;
-    font-weight: 600;
+    font-weight: 700;
   }
 
 

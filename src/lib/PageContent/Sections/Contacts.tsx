@@ -15,7 +15,6 @@ const ContactContainer = styled(AnimatedContainer)`
   min-height: 400px;
   margin: 0 auto;
 
-  /* padding: 2rem; */
   border-radius: 1rem;
   
   display: flex;
@@ -38,8 +37,6 @@ const Ul = styled.ul`
 const Li = styled(AnimatedLi)`
   height: 5rem;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.secondary};
-  box-shadow: 5px 5px 1rem #0000006b;
 
   border-radius: 1rem;
 
@@ -60,7 +57,6 @@ const Img = styled.img`
 const HeaderImg = styled.img`
   height: 3rem;
   margin-top: 10px;
-  /* border-radius: 1rem; */
 `;
 
 const A = styled.a`

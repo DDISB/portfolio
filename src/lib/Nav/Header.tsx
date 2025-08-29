@@ -5,10 +5,14 @@ import NavButton from "./PageButton";
 const HeaderContainer = styled.header`
   position: fixed;
   z-index: 100;
-  top: 1rem;
+  top: 0rem;
   left: 0;
   right: 0;
   height: 4rem;
+  
+  width: 100%;
+  background-color: ${({ theme }) => theme.colors.background};
+  transition: all 0.4s ease;
   
   display: flex;
   justify-content: center;
@@ -16,17 +20,11 @@ const HeaderContainer = styled.header`
 `;
 
 const HeaderContent = styled.div`
-  margin: 0 1rem ;
   min-height: 100%;
-  border: solid 1px ${({ theme }) => theme.colors.secondary};
-  border-radius: 2rem;
-  background-color: ${({ theme }) => theme.colors.headerBackground};
 
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0 1rem;
-  box-shadow: 5px 5px 1rem #0000006b;
 `
 
 export default function Header() {

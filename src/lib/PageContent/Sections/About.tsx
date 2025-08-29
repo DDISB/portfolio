@@ -27,9 +27,6 @@ const Ul = styled.ul`
 
 const Li = styled(AnimatedLi)`
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.secondary};
-  box-shadow: 5px 5px 1rem #0000006b;
-
   border-radius: 1rem;
   padding: 1rem;
 
