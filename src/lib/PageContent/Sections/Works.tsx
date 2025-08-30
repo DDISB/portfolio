@@ -75,7 +75,6 @@ const HeaderImg = styled.img`
   @media (max-width: 600px) {
     height: 2rem;
     margin-top: 0;
-
   }
 `;
 

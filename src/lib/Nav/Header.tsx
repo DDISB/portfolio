@@ -11,7 +11,9 @@ const HeaderContainer = styled.header`
   height: 4rem;
   
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.background};
+  /* background-color: ${({ theme }) => theme.colors.background}; */
+  background-color: #0a0a0b;
+  color: #fff;
   transition: all 0.4s ease;
   
   display: flex;

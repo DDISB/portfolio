@@ -75,7 +75,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
   }
   
   .theme-button {
-    color: ${({ theme }) => theme.colors.contrast};
+    color: #fff;
     padding: 8px 16px;
     border: none;
     cursor: pointer;
@@ -100,5 +100,8 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
     h2 {
       font-size: 2rem;
     }
+    .theme-button {
+    color: ${({ theme }) => theme.colors.contrast};
+  }
   }
 `;

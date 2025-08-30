@@ -13,10 +13,10 @@ const ContentContainer = styled.div`
 `;
 
 const Section = styled.section`
-  padding: 1rem;
+  width: 100%;
+  padding: 0;
   padding-top: 7rem;
   margin-top: -7rem;
-  width: 100%;
 
   display: flex;
   flex-direction: column;
