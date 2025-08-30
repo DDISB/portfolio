@@ -1,4 +1,4 @@
-import { delay, type MotionNodeOptions } from 'framer-motion';
+import { type MotionNodeOptions } from 'framer-motion';
 import { type ReactNode } from 'react';
 import { motion } from 'framer-motion';
 
