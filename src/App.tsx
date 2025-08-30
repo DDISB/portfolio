@@ -11,7 +11,7 @@ export default function App() {
   // Инициализируем тему из localStorage или используем 'light' по умолчанию
   const [themeName, setThemeName] = useState<'light' | 'dark'>(() => {
     const savedTheme = localStorage.getItem('theme');
-    return (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : 'light';
+    return (savedTheme === 'light' || savedTheme === 'dark') ? savedTheme : 'dark';
   });
   
   const width = useWindowWidth();
