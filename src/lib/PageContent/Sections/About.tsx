@@ -1,5 +1,8 @@
-import { AnimatedContainer, AnimatedLi } from "@/lib/animations/appearanceAnimation";
-import styled from "styled-components";
+import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
+import { AnimatedLi } from "@/lib/animations/appearanceAnimation";
+import styled, { useTheme } from "styled-components";
+import AboutLight from "@/assets/aboutLight.svg"
+import AboutDark from "@/assets/aboutDark.svg"
 
 const AboutContainer = styled(AnimatedContainer)`
   position: static;
@@ -56,14 +59,26 @@ const ColoredP = styled.p`
   color: ${({ theme }) => theme.colors.additional};
 `
 
+const HeaderImg = styled.img`
+  height: 3rem;
+  margin-top: 5px;
+  @media (max-width: 600px) {
+    height: 2rem;
+    margin-top: 0 px;
+  }
+`;
+
 export default function() {
+  const theme = useTheme();
   const LiHover = {
       y: -4,
     }
 
   return (
     <AboutContainer>
-      <h2>Обо мне</h2>
+      <h2>
+        <HeaderImg src={theme.themeName === 'light' ? AboutLight : AboutDark } alt="" /> Обо мне
+      </h2>
       <Ul>
         <Li whileHover={LiHover}>
           <ColoredP>&mdash; Общая информация</ColoredP>          

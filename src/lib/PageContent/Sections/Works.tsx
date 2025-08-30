@@ -1,4 +1,5 @@
-import { AnimatedLi, AnimatedContainer} from "@/lib/animations/appearanceAnimation";
+import { AnimatedLi} from "@/lib/animations/appearanceAnimation";
+import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
 import styled, { useTheme } from "styled-components";
 import workLight from '@/assets/workLight.svg'
 import workDark from '@/assets/workDark.svg'
@@ -12,8 +13,6 @@ const ProjectsContainer = styled(AnimatedContainer)`
   min-height: 400px;
   margin: 0 auto;
 
-  border-radius: 1rem;
-  
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -33,7 +32,6 @@ const LiLeft = styled(AnimatedLi)`
   min-height: 20rem;
   width: 100%;
 
-  border-radius: 1rem;
   padding: 1rem;
 
   font-weight: 600;
@@ -54,7 +52,6 @@ const LiRight = styled(AnimatedLi)`
   min-height: 20rem;
   width: 100%;
 
-  border-radius: 1rem;
   padding: 1rem;
 
   font-weight: 600;
@@ -73,13 +70,18 @@ const LiRight = styled(AnimatedLi)`
 `;
 
 const HeaderImg = styled.img`
-  margin-top: 5px;
   height: 3rem;
+  margin-top: 5px;
+  @media (max-width: 600px) {
+    height: 2rem;
+    margin-top: 0;
+
+  }
 `;
 
 const Img = styled.img`
   max-width: 60%;
-  border-radius: 1rem;
+  border-radius: 5px;
   object-fit: contain;
   @media (max-width: 1000px) {
     height: max-content;
@@ -90,7 +92,6 @@ const Img = styled.img`
 const DesciptionContainer = styled.div`
   flex-grow: 1;
   height: 100%;
-  border-radius: 1rem;
   padding: 1rem;
 
   display: flex;
@@ -107,7 +108,6 @@ const Desciption = styled.div`
 
 const LinkContainer = styled.div`
   width: 100%;
-  border-radius: 1rem;
   height: 3rem;
 
   display: flex;
@@ -166,8 +166,8 @@ export default function() {
               <P>"Brando" – веб-приложение, где пользователи выполняют задания от партнеров (квизы, челленджи, покупки) и зарабатывают очки. Очки повышают уровень, открывая новые бонусы: скидки, эксклюзивные товары или реальные призы. Есть карта бонусов и магазин призов</P>
             </Desciption>
             <LinkContainer>
-              <AButton href="https://github.com/DDISB/Stainless-Hackathon/">GitHub</AButton>
-              <AButton href="https://ddisb.github.io/Stainless-Hackathon/">Демо</AButton>
+              <AButton href="https://github.com/DDISB/Stainless-Hackathon/" target="_blank">GitHub</AButton>
+              <AButton href="https://ddisb.github.io/Stainless-Hackathon/" target="_blank">Демо</AButton>
             </LinkContainer>
           </DesciptionContainer>
         </LiLeft>
@@ -181,8 +181,8 @@ export default function() {
               <P>Boldo - это одностраничный лэндинг написанный и использованием HTML, CSS и JavaScript. Представляет собой страницу в строгом дизайне, а так же поддерживает адаптивную верстку для устройств с разным размером экранов.</P>
             </Desciption> 
             <LinkContainer>
-              <AButton href="https://github.com/DDISB/Boldo.github.io">GitHub</AButton>
-              <AButton href="https://ddisb.github.io/Boldo.github.io/">Демо</AButton>
+              <AButton href="https://github.com/DDISB/Boldo.github.io" target="_blank">GitHub</AButton>
+              <AButton href="https://ddisb.github.io/Boldo.github.io/" target="_blank">Демо</AButton>
             </LinkContainer>
           </DesciptionContainer>
         </LiRight>

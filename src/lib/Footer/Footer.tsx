@@ -23,13 +23,16 @@ const ContentContainer = styled.div`
   justify-content: space-between;
 `;
 
-export default function Footer() {
+const P = styled.p`
+font-weight: 600;
+`
 
+export default function Footer() {
+  const year = new Date().getFullYear();
   return (
     <FooterContainer>
       <ContentContainer>
-        {/* <p>123 </p>  */}
-        {/* <p>123 </p> */}
+      <P>&#169; {year} / Демид Самылов</P>
       </ContentContainer>
     </FooterContainer>
   )

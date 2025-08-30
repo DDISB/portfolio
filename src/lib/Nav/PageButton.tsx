@@ -9,6 +9,8 @@ const StyledHeaderButton = styled.button`
     border: 0px;
     padding: 1rem 1rem;
     border-radius: 2rem;
+    font-weight: 600;
+
     cursor: pointer;
 
     transform: translateY(0);

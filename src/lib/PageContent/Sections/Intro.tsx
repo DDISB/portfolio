@@ -1,8 +1,9 @@
+import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
 import { BackgroundBeams } from "@/lib/components/ui/background-beams";
 import styled from "styled-components";
 import useWindowWidth from '@lib/hooks/useWindowWidth';
 
-const IntroContainer = styled.div`
+const IntroContainer = styled(AnimatedContainer)`
   /* position: static; */
   min-height: 90vh;  
   width: 100%;
@@ -27,7 +28,7 @@ export default function() {
 
   return (
     <IntroContainer>
-      <h1>Привет, я Самылов Демид</h1>
+      <h1>Привет, я Демид Самылов</h1>
       <BackgroundBeamsContainer>
         {width > 1000 && <BackgroundBeams/>}
       </BackgroundBeamsContainer>

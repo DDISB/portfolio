@@ -5,7 +5,7 @@ export const lightTheme: DefaultTheme = {
   colors: {
     background: '#f4f8ffff',
     primary: '#198cff',
-    secondary: '#f4f8ffff',
+    secondary: '#e7e7e7ff',
     headerBackground: '#00000000',
     contrast: '#0a0a0b',
     additional: '#8070f9ff',
@@ -18,7 +18,7 @@ export const darkTheme: DefaultTheme = {
   colors: {
     background: '#0a0a0b',
     primary: '#0a0a0b',
-    secondary: '#0a0a0b',
+    secondary: '#171719ff',
     headerBackground: '#00000000',
     contrast: '#fff',
     additional: '#8070f9ff',
@@ -35,6 +35,7 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
       justify-content: start;
       width: 100%;
       font-size: 16px;
+      font-family: "Nata Sans", sans-serif;;
     }
   
   body {
@@ -77,7 +78,6 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
     color: ${({ theme }) => theme.colors.contrast};
     padding: 8px 16px;
     border: none;
-    border-radius: 4px;
     cursor: pointer;
     position: fixed;
     top: 20px;

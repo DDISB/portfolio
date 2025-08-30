@@ -1,4 +1,5 @@
-import { AnimatedLi, AnimatedContainer} from "@/lib/animations/appearanceAnimation";
+import { AnimatedLi } from "@/lib/animations/appearanceAnimation";
+import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
 import styled, { useTheme } from "styled-components";
 import githubSvg from '@/assets/github.svg'
 import telegramSvg from '@/assets/telegram.svg'
@@ -57,6 +58,10 @@ const Img = styled.img`
 const HeaderImg = styled.img`
   height: 3rem;
   margin-top: 10px;
+  @media (max-width: 600px) {
+    height: 2rem;
+    margin-top: 5px;
+  }
 `;
 
 const A = styled.a`
@@ -122,7 +127,7 @@ export default function() {
 
       <Ul>
         <Li whileHover={LiHover}>
-          <A href="https://github.com/DDISB">
+          <A href="https://github.com/DDISB" target="_blank">
             <Img src={githubSvg} alt="GitHab logo" />
             <TextWrapper>
               {width > 375 && <p>GitHab</p>}
@@ -132,7 +137,7 @@ export default function() {
         </Li>
 
         <Li whileHover={LiHover}>
-          <A href="https://t.me/DemidSamylov">
+          <A href="https://t.me/DemidSamylov" target="_blank">
             <Img src={telegramSvg} alt="Telegram logo" ></Img>
             <TextWrapper>
               {width > 375 && <p>Telegram</p>}
