@@ -1,7 +1,7 @@
 import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
 import styled from "styled-components";
 import useWindowWidth from '@lib/hooks/useWindowWidth';
-import Dither from "@/lib/components/ui/Dither";
+import Silk from "@/lib/components/ui/Silk";
 
 const IntroContainer = styled(AnimatedContainer)`
   position: relative;
@@ -14,13 +14,11 @@ const IntroContainer = styled(AnimatedContainer)`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* z-index: 0; */
 `;
 
 const BackgroundBeamsContainer = styled.div`
   width: 100%;
   height: 100vh;
-  /* height: 100vh; */
   position: absolute;
   overflow: 'hidden';
   top: 0;
@@ -32,17 +30,12 @@ const Wrapper = styled.div`
   position: relative;
   width: 100%;
   height: 100%;
-  /* z-index: 1; */
 `;
 
 const H1 = styled.h1`
   z-index: 10;
   color: white;
-`;
-
-const H1Mobile = styled.h1`
-  z-index: 10;
-  color: ${({ theme }) => theme.colors.text};
+  text-align: center;
   padding: 1rem;
 `;
 
@@ -51,20 +44,25 @@ export default function() {
 
   return (
     <IntroContainer>
-      {width > 600 && <H1>Привет, я Демид Самылов</H1>}
-      {width < 600 && <H1Mobile>Привет, я Демид Самылов</H1Mobile>}
+      <H1>Привет, я Демид Самылов</H1>
       <BackgroundBeamsContainer>
         <Wrapper>
           {width > 600 &&
-            <Dither
-              waveColor={[0.5, 0.5, 0.5]}
-              disableAnimation={false}
-              enableMouseInteraction={false}
-              mouseRadius={0.9}
-              colorNum={40}
-              waveAmplitude={0.35}
-              waveFrequency={3}
-              waveSpeed={0.05}
+            <Silk
+              speed={3}
+              scale={1}
+              color="#514f60"
+              noiseIntensity={0.1}
+              rotation={0}
+            />
+          }
+          {width < 600 &&
+            <Silk
+              speed={3}
+              scale={0.8}
+              color="#514f60"
+              noiseIntensity={0.1}
+              rotation={0}
             />
           }
         </Wrapper>
