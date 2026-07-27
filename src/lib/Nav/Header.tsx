@@ -1,55 +1,39 @@
-import { sections } from "./sections";
-import styled from "styled-components";
-import NavButton from "./PageButton";
+import { sections } from './sections';
+import styled from 'styled-components';
+import NavButton from './PageButton';
 
 const HeaderContainer = styled.header`
   position: fixed;
   z-index: 100;
-  top: 0rem;
-  left: 0;
-  right: 0;
-  height: 4rem;
-  
-  width: 100%;
-  /* background-color: ${({ theme }) => theme.colors.background}; */
-  background-color: #0a0a0b;
-  color: #fff;
-  transition: all 0.4s ease;
-  
+  inset: 0 0 auto;
+  height: 4.5rem;
   display: flex;
   justify-content: center;
-  padding: 0 1rem;
+  padding: 0 9rem 0 1rem;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.border};
+  color: ${({ theme }) => theme.colors.text};
+  background: ${({ theme }) => theme.colors.headerBackground};
+  backdrop-filter: blur(18px);
+  transition: background 0.25s ease, border-color 0.25s ease;
 `;
 
-const HeaderContent = styled.div`
-  min-height: 100%;
-
+const HeaderContent = styled.nav`
+  width: 100%;
+  max-width: 1120px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-`
+  justify-content: center;
+  gap: 0.35rem;
+`;
 
 export default function Header() {
-  
   return (
     <HeaderContainer>
-      <HeaderContent>
-        <NavButton 
-          text="обо мне" 
-          sectionId={sections.about}
-        />
-        <NavButton 
-          text="работы"
-          sectionId={sections.works}
-        />
-        <NavButton 
-          text="навыки"
-          sectionId={sections.skills}
-        />
-        <NavButton 
-          text="контакты"
-          sectionId={sections.contacts}
-        />
+      <HeaderContent aria-label="Навигация по странице">
+        <NavButton text="Обо мне" sectionId={sections.about} />
+        <NavButton text="Работы" sectionId={sections.works} />
+        <NavButton text="Навыки" sectionId={sections.skills} />
+        <NavButton text="Контакты" sectionId={sections.contacts} />
       </HeaderContent>
     </HeaderContainer>
   );

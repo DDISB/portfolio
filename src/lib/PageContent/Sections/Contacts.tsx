@@ -1,164 +1,47 @@
-import { AnimatedLi } from "@/lib/animations/appearanceAnimation";
-import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
-import styled, { useTheme } from "styled-components";
-import githubSvg from '@/assets/github.svg'
-import telegramSvg from '@/assets/telegram.svg'
-import mailSvg from '@/assets/mail.svg'
-import contactsLight from '@/assets/contactsLight.svg'
-import contactsDark from '@/assets/contactsDark.svg'
-import useWindowWidth from "@/lib/hooks/useWindowWidth";
-import { useState } from "react";
+import { AnimatedLi } from '@/lib/animations/appearanceAnimation';
+import { AnimatedContainer } from '@/lib/animations/AnimatedContainer';
+import styled from 'styled-components';
+import githubSvg from '@/assets/github.svg';
+import telegramSvg from '@/assets/telegram.svg';
+import mailSvg from '@/assets/mail.svg';
+import { useState } from 'react';
 
-const ContactContainer = styled(AnimatedContainer)`
-  position: static;
-  max-width: 800px;
-  width: 100%;
-  min-height: 400px;
-  margin: 0 auto;
-
-  border-radius: 1rem;
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Container = styled(AnimatedContainer)`max-width: 800px; width: 100%; margin: 0 auto;`;
+const List = styled.ul`list-style: none; padding: 0; display: grid; gap: 0.9rem; margin-top: 2.5rem;`;
+const Item = styled(AnimatedLi)`
+  list-style: none;
+  min-height: 5.25rem;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 1.1rem;
+  background: ${({ theme }) => theme.colors.surface};
+  overflow: hidden;
+  transition: border-color 0.2s ease, background 0.2s ease;
+  &:hover { border-color: ${({ theme }) => theme.colors.primary}; background: ${({ theme }) => theme.colors.surfaceElevated}; }
 `;
-
-const Ul = styled.ul`  
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-  display: flex;
-  align-items: center;
-
-  margin-top: 2rem;
+const ContactContent = styled.a`
+  width: 100%; min-height: 5.25rem; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem;
 `;
-
-const Li = styled(AnimatedLi)`
-  height: 5rem;
-  width: 100%;
-
-  border-radius: 1rem;
-
-  font-weight: 600;
-  transform: translateY(0);
-
-  border-right: solid 5px #00000000 ;
-  border-left: solid 5px #00000000;
+const EmailButton = styled.button`
+  width: 100%; min-height: 5.25rem; padding: 1rem 1.25rem; display: flex; align-items: center; gap: 1rem; text-align: left;
 `;
+const Icon = styled.img`width: 3rem; height: 3rem; padding: 0.3rem; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 0.8rem; background: #fff;`;
+const Text = styled.div`min-width: 0; flex: 1; display: flex; align-items: center; justify-content: space-between; gap: 1rem; p:last-child { overflow-wrap: anywhere; } @media (max-width: 500px) { p:first-child { display: none; } }`;
+const Status = styled.span`color: ${({ theme }) => theme.colors.primary}; font-size: 0.78rem; font-weight: 750;`;
 
-const Img = styled.img`
-  height: 100%;
-  background-color: #fff;
-  border-radius: 1rem;
-  padding: 2px;
-`;
-
-const HeaderImg = styled.img`
-  height: 3rem;
-  margin-top: 10px;
-  @media (max-width: 600px) {
-    height: 2rem;
-    margin-top: 5px;
-  }
-`;
-
-const A = styled.a`
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  color: ${({ theme }) => theme.colors.text};
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const EmailContainer = styled.div`
-  cursor: pointer;
-  width: 100%;
-  height: 100%;
-  padding: 1rem;
-  color: ${({ theme }) => theme.colors.text};
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-`;
-
-const TextWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  width: 100%; 
-`;
-
-const EmailText = styled.div`
-  display: flex;
-  height: 100%;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-export default function() {
-  const theme = useTheme();
-  const width = useWindowWidth();
-  const LiHover = {
-    borderRight: `solid 5px ${theme.colors.additional}`,
-    borderLeft: `solid 5px ${theme.colors.additional}`,
-    y: -4,
-  }
+export default function Contacts() {
   const [isCopied, setIsCopied] = useState(false);
-
   const handleCopy = async () => {
-    try {
-      let text: string = 'demidsamylov@gmail.com';
-      await navigator.clipboard.writeText(text);
-      setIsCopied(true);
-      setTimeout(() => setIsCopied(false), 2000); // Сброс статуса через 2 секунды
-    } catch (err) {
-      console.error('Ошибка копирования:', err);
-    }
+    try { await navigator.clipboard.writeText('demidsamylov@gmail.com'); setIsCopied(true); window.setTimeout(() => setIsCopied(false), 2000); }
+    catch (error) { console.error('Ошибка копирования:', error); }
   };
   return (
-    <ContactContainer>
-      <h2>
-        <HeaderImg src={theme.themeName === 'light' ? contactsLight : contactsDark } alt="" /> Мои контакты
-      </h2>
-
-      <Ul>
-        <Li whileHover={LiHover}>
-          <A href="https://github.com/DDISB" target="_blank">
-            <Img src={githubSvg} alt="GitHab logo" />
-            <TextWrapper>
-              {width > 375 && <p>GitHab</p>}
-              <p>github.com/DDISB</p>
-            </TextWrapper>
-          </A>
-        </Li>
-
-        <Li whileHover={LiHover}>
-          <A href="https://t.me/DemidSamylov" target="_blank">
-            <Img src={telegramSvg} alt="Telegram logo" ></Img>
-            <TextWrapper>
-              {width > 375 && <p>Telegram</p>}
-              <p>t.me/DemidSamylov</p>
-            </TextWrapper>
-          </A>
-        </Li>
-
-        <Li whileHover={LiHover}>
-          <EmailContainer onClick={handleCopy}>
-            <Img src={mailSvg} alt="Mail logo" ></Img>
-            <TextWrapper>
-              {width > 375 && <p>Gmail</p>}
-              <EmailText>
-                <p>demidsamylov@gmail.com</p>
-                {isCopied && <span style={{ marginLeft: '10px', color: 'green' }}>✓ Скопировано!</span>}
-              </EmailText>
-            </TextWrapper>
-          </EmailContainer>
-        </Li>
-      </Ul>
-    </ContactContainer>
+    <Container>
+      <h2>Мои контакты</h2>
+      <List>
+        <Item whileHover={{ y: -3 }}><ContactContent href="https://github.com/DDISB" target="_blank" rel="noreferrer"><Icon src={githubSvg} alt="" /><Text><p>GitHub</p><p>github.com/DDISB</p></Text></ContactContent></Item>
+        <Item whileHover={{ y: -3 }}><ContactContent href="https://t.me/DemidSamylov" target="_blank" rel="noreferrer"><Icon src={telegramSvg} alt="" /><Text><p>Telegram</p><p>t.me/DemidSamylov</p></Text></ContactContent></Item>
+        <Item whileHover={{ y: -3 }}><EmailButton onClick={handleCopy} aria-label="Скопировать адрес электронной почты"><Icon src={mailSvg} alt="" /><Text><p>Почта</p><p>demidsamylov@gmail.com</p></Text>{isCopied && <Status>Скопировано</Status>}</EmailButton></Item>
+      </List>
+    </Container>
   );
 }

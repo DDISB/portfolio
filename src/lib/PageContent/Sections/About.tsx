@@ -1,114 +1,85 @@
-import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
-import { AnimatedLi } from "@/lib/animations/appearanceAnimation";
-import styled, { useTheme } from "styled-components";
-import AboutLight from "@/assets/aboutLight.svg"
-import AboutDark from "@/assets/aboutDark.svg"
+import { AnimatedContainer } from '@/lib/animations/AnimatedContainer';
+import styled from 'styled-components';
+import brando from '@/img/brando.png';
+import boldo from '@/img/boldo.png';
 
-const AboutContainer = styled(AnimatedContainer)`
-  position: static;
-  max-width: 1200px;
-  width: 100%;
-  min-height: 400px;
-  margin: 0 auto;
-
-  border-radius: 1rem;
-  
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Container = styled(AnimatedContainer)`max-width: 1120px; width: 100%; margin: 0 auto;`;
+const Block = styled.div`margin-top: clamp(4rem, 8vw, 7rem); &:first-of-type { margin-top: 2.5rem; }`;
+const Intro = styled.p`max-width: 760px; margin: 1rem auto 0; text-align: center; font-size: 1.1rem;`;
+const Grid = styled.div`display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 2rem; @media (max-width: 760px) { grid-template-columns: 1fr; }`;
+const Achievement = styled.article`
+  padding: 1.5rem; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 1.25rem;
+  background: ${({ theme }) => theme.colors.surface}; transition: border-color 0.2s ease, transform 0.2s ease;
+  &:hover { border-color: ${({ theme }) => theme.colors.primary}; transform: translateY(-3px); }
 `;
-
-const Ul = styled.ul`  
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
-
-  margin-top: 2rem;
+const AchievementTitle = styled.h3`margin: 1rem 0 0.5rem; font-size: 1.15rem; letter-spacing: -0.02em;`;
+const Details = styled.details`
+  margin-top: 1rem; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 1.25rem;
+  background: ${({ theme }) => theme.colors.surface}; overflow: hidden; transition: border-color 0.2s ease;
+  &:hover, &[open] { border-color: ${({ theme }) => theme.colors.primary}; }
 `;
-
-const Li = styled(AnimatedLi)`
-  width: 100%;
-  border-radius: 1rem;
-  padding: 1rem;
-
-  font-weight: 600;
-  transform: translateY(0);
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1rem;
-
-  @media (max-width: 1000px) {
-    height: max-content;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
+const Summary = styled.summary`
+  position: relative; display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.5rem 4rem 1.5rem 1.5rem;
+  cursor: pointer; list-style: none; &::-webkit-details-marker { display: none; }
+  &::after { content: '+'; position: absolute; right: 1.5rem; top: 50%; translate: 0 -50%; color: ${({ theme }) => theme.colors.primary}; font-size: 1.7rem; font-weight: 400; }
+  details[open] &::after { content: '−'; }
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
 `;
-
-const TextWrapper = styled.div`
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
+const SummaryTitle = styled.h3`font-size: 1.3rem; letter-spacing: -0.02em;`;
+const Period = styled.p`white-space: nowrap; color: ${({ theme }) => theme.colors.primary}; font-weight: 700;`;
+const DetailContent = styled.div`padding: 0 1.5rem 1.5rem; border-top: 1px solid ${({ theme }) => theme.colors.border};`;
+const Subheading = styled.h4`margin-top: 1.5rem; color: ${({ theme }) => theme.colors.text}; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;`;
+const Skills = styled.ul`display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; list-style: none;`;
+const Skill = styled.li`padding: 0.45rem 0.75rem; border-radius: 999px; color: ${({ theme }) => theme.colors.primary}; background: ${({ theme }) => theme.colors.accentSoft}; font-size: 0.85rem; font-weight: 700;`;
+const Tasks = styled.ul`display: grid; gap: 0.6rem; margin-top: 0.8rem; padding-left: 1.2rem; color: ${({ theme }) => theme.colors.muted};`;
+const ProjectList = styled.ul`display: grid; gap: 1rem; margin-top: 1rem; padding: 0; list-style: none;`;
+const StudyProject = styled.li`
+  display: grid; grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr); gap: 1.25rem; align-items: center;
+  padding: 1rem; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 1rem;
+  background: ${({ theme }) => theme.colors.surfaceElevated};
+  @media (max-width: 650px) { grid-template-columns: 1fr; }
 `;
+const Screenshot = styled.img`width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 0.8rem;`;
+const ProjectInfo = styled.div`display: flex; flex-direction: column; gap: 0.55rem;`;
+const ProjectTitle = styled.h4`color: ${({ theme }) => theme.colors.text}; font-size: 1.15rem; font-weight: 750;`;
 
-const ColoredP = styled.p`
-  color: ${({ theme }) => theme.colors.additional};
-`
-
-const HeaderImg = styled.img`
-  height: 3rem;
-  margin-top: 5px;
-  @media (max-width: 600px) {
-    height: 2rem;
-    margin-top: 0 px;
-  }
-`;
-
-export default function() {
-  const theme = useTheme();
-  const LiHover = {
-      y: -4,
-    }
-
+export default function About() {
   return (
-    <AboutContainer>
-      <h2>
-        <HeaderImg src={theme.themeName === 'light' ? AboutLight : AboutDark } alt="" /> Обо мне
-      </h2>
-      <Ul>
-        <Li whileHover={LiHover}>
-          <ColoredP>&mdash; Общая информация</ColoredP>          
-          <p>Я — веб-разработчик с 2 годами опыта, специализируюсь на TypeScript, React, Svelte, 
-            API-интеграциях. Создаю быстрые, надежные и масштабируемые решения для бизнеса: 
-            от лэндингов до сложных веб-приложений.
-            Работаю прозрачно: от ТЗ до запуска вы будете понимать, как движется проект. 
-            Готов не просто „написать код“, а решить вашу проблему.
-          </p>
-        </Li>
-
-        <Li whileHover={LiHover}>
-          <ColoredP>&mdash; Образование</ColoredP>
-          <TextWrapper>
-            <p>Вятский государственный университет - Информатика и вычислительная техника.</p>
-            <p>2022-2026</p>
-          </TextWrapper>
-        </Li>
-
-        <Li whileHover={LiHover}>
-          <ColoredP>&mdash; Коммерческий опыт</ColoredP>  
-          <TextWrapper>
-            <p>В рамках работы в научно-исследовательской группы спроектировал и разработал
-              веб-приложение для сбора и анализа производственных данных на 
-              крупном промышленном предприятии.<br/>
-              Технологии: SvelteKit, PostgreSQL, KeystoneJS, GIT, GraphQL.</p>
-            <p>2024-2025</p>
-          </TextWrapper>        
-        </Li>
-      </Ul>
-    </AboutContainer>
+    <Container>
+      <h2>Обо мне</h2>
+      <Intro>Специализируюсь на backend-разработке: проектирую API, серверную логику и работу с данными. Понимание frontend помогает мне видеть продукт целиком и эффективнее взаимодействовать с клиентской частью.</Intro>
+      <Block>
+        <h2>Чем я могу быть полезен</h2>
+        <Grid>
+          <Achievement><AchievementTitle>Backend-сервисы</AchievementTitle><p>Разрабатываю серверную логику на Python и FastAPI, разделяя приложение на понятные и поддерживаемые компоненты.</p></Achievement>
+          <Achievement><AchievementTitle>API и данные</AchievementTitle><p>Проектирую API, интегрирую внешние сервисы и организую надёжную работу приложения с базами данных.</p></Achievement>
+          <Achievement><AchievementTitle>Задача целиком</AchievementTitle><p>Погружаюсь в бизнес-контекст, предлагаю техническое решение и последовательно довожу его до работающего продукта.</p></Achievement>
+        </Grid>
+      </Block>
+      <Block>
+        <h2>Образование и работа</h2>
+        <Details>
+          <Summary><div><SummaryTitle>Вятский государственный университет</SummaryTitle><p>Бакалавриат: Информатика и вычислительная техника</p></div><Period>2022–2026</Period></Summary>
+          <DetailContent>
+            <Subheading>Полученные навыки</Subheading><Skills>{['Алгоритмы и структуры данных', 'Базы данных', 'Проектирование ПО', 'Веб-разработка', 'Разработка прикладного ПО', 'Проектирование цифровых устройств', 'Командная работа', 'Git'].map(skill => <Skill key={skill}>{skill}</Skill>)}</Skills>
+            <Subheading>Учебные и командные проекты</Subheading>
+            <ProjectList>
+              <StudyProject>
+                <Screenshot src={brando} alt="Скриншот проекта Brando" />
+                <ProjectInfo><ProjectTitle>Brando</ProjectTitle><p>Командное веб-приложение с заданиями от партнёров, системой очков, уровнями пользователей и каталогом наград.</p></ProjectInfo>
+              </StudyProject>
+              <StudyProject>
+                <Screenshot src={boldo} alt="Скриншот проекта Boldo" />
+                <ProjectInfo><ProjectTitle>Boldo</ProjectTitle><p>Адаптивный одностраничный сайт, созданный для практики семантической вёрстки, CSS и клиентского JavaScript.</p></ProjectInfo>
+              </StudyProject>
+            </ProjectList>
+          </DetailContent>
+        </Details>
+        <Details>
+          <Summary><div><SummaryTitle>Научно-исследовательская группа</SummaryTitle><p>Веб-разработчик</p></div><Period>2024–2025</Period></Summary>
+          <DetailContent><Subheading>Задачи и вклад</Subheading><Tasks><li>Проектирование интерфейсов системы сбора производственных данных.</li><li>Разработка приложения на SvelteKit и интеграция с GraphQL API.</li><li>Работа с PostgreSQL и KeystoneJS.</li><li>Подготовка интерфейсов анализа данных для сотрудников предприятия.</li></Tasks></DetailContent>
+        </Details>
+      </Block>
+    </Container>
   );
 }

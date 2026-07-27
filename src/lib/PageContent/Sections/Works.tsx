@@ -1,191 +1,56 @@
-import { AnimatedLi} from "@/lib/animations/appearanceAnimation";
-import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
-import styled, { useTheme } from "styled-components";
-import workLight from '@/assets/workLight.svg'
-import workDark from '@/assets/workDark.svg'
-import brando from '@/img/brando.png'
-import boldo from '@/img/boldo.png'
+import { AnimatedLi } from '@/lib/animations/appearanceAnimation';
+import { AnimatedContainer } from '@/lib/animations/AnimatedContainer';
+import styled from 'styled-components';
+import brando from '@/img/brando.png';
 
-const ProjectsContainer = styled(AnimatedContainer)`
-  position: static;
-  max-width: 1200px;
-  width: 100%;
-  min-height: 400px;
-  margin: 0 auto;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+const Container = styled(AnimatedContainer)`max-width: 1120px; width: 100%; margin: 0 auto;`;
+const List = styled.ul`list-style: none; padding: 0; display: grid; gap: 1.5rem; margin-top: 2.5rem;`;
+const Project = styled(AnimatedLi)`
+  list-style: none; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(300px, 0.75fr);
+  gap: clamp(1.25rem, 4vw, 3rem); padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 1.5rem;
+  background: ${({ theme }) => theme.colors.surface}; overflow: hidden; box-shadow: 0 20px 55px rgba(0, 0, 0, 0.07);
+  transition: border-color 0.2s ease, background 0.2s ease;
+  &:hover { border-color: ${({ theme }) => theme.colors.primary}; background: ${({ theme }) => theme.colors.surfaceElevated}; }
+  &:nth-child(even) > img { order: 2; }
+  @media (max-width: 850px) { grid-template-columns: 1fr; &:nth-child(even) > img { order: 0; } }
+`;
+const Preview = styled.img`width: 100%; height: 100%; min-height: 320px; border-radius: 1rem; object-fit: cover; object-position: top; @media (max-width: 600px) { min-height: 210px; }`;
+const Description = styled.div`display: flex; flex-direction: column; align-items: flex-start; justify-content: center; padding: clamp(0.5rem, 2vw, 1rem);`;
+const Label = styled.p`margin-bottom: 0.75rem; color: ${({ theme }) => theme.colors.primary}; font-size: 0.78rem; font-weight: 750; letter-spacing: 0.08em; text-transform: uppercase;`;
+const Copy = styled.p`margin-top: 1rem;`;
+const Links = styled.div`display: flex; flex-wrap: wrap; gap: 0.75rem; margin-top: 1.5rem;`;
+const LinkButton = styled.a`
+  display: inline-flex; align-items: center; justify-content: center; min-width: 7rem; padding: 0.7rem 1rem;
+  border: 1px solid ${({ theme }) => theme.colors.primary}; border-radius: 999px; color: ${({ theme }) => theme.colors.text};
+  font-size: 0.9rem; font-weight: 700; transition: color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  &:hover { color: #fff; background: ${({ theme }) => theme.colors.primary}; transform: translateY(-2px); }
 `;
 
-const Ul = styled.ul`  
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2rem;
+const Tech = styled.p`margin-top: 1rem; font-size: 0.9rem;`;
 
-  margin-top: 2rem;
-`;
-
-const LiLeft = styled(AnimatedLi)`
-  min-height: 20rem;
-  width: 100%;
-
-  padding: 1rem;
-
-  font-weight: 600;
-  transform: translateY(0);
-
-  display: flex;
-  align-items: flex-start;
-  gap: 2rem;
-
-  @media (max-width: 1000px) {
-    height: max-content;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-`;
-
-const LiRight = styled(AnimatedLi)`
-  min-height: 20rem;
-  width: 100%;
-
-  padding: 1rem;
-
-  font-weight: 600;
-  transform: translateY(0);
-
-  display: flex;
-  flex-direction: row-reverse;
-  align-items: flex-start;
-  gap: 2rem;
-
-  @media (max-width: 1000px) {
-    height: max-content;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-`;
-
-const HeaderImg = styled.img`
-  height: 3rem;
-  margin-top: 5px;
-  @media (max-width: 600px) {
-    height: 2rem;
-    margin-top: 0;
-  }
-`;
-
-const Img = styled.img`
-  max-width: 60%;
-  border-radius: 5px;
-  object-fit: contain;
-  @media (max-width: 1000px) {
-    height: max-content;
-    max-width: 100%;
-  }
-`;
-
-const DesciptionContainer = styled.div`
-  flex-grow: 1;
-  height: 100%;
-  padding: 1rem;
-
-  display: flex;
-  gap: 1rem;
-  flex-direction: column;
-  justify-content: space-between;
-`;
-
-const Desciption = styled.div`
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
-`;
-
-const LinkContainer = styled.div`
-  width: 100%;
-  height: 3rem;
-
-  display: flex;
-  align-items: center;
-  gap: 3rem;
-
-  :hover {
-    transition:  0.3s all ease;
-    color: #fff;
-    background-color: ${({ theme }) => theme.colors.additional};
-  }
-`;
-
-const AButton = styled.a`
-  height: 100%;
-  width: 8rem;
-  color: ${({ theme }) => theme.colors.text};
-
-  border-radius: 1rem;
-  padding: 1rem;
-  border: 2px solid ${({ theme }) => theme.colors.additional};
-  
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-`;
-
-const P = styled.p`
-  padding-top: 1rem;
-`
-
-const ColoredP = styled.p`
-  color: ${({ theme }) => theme.colors.additional};
-`
-
-export default function() {
-  const theme = useTheme();
-  const LiHover = {
-    y: -4,
-  }
-
+interface ProjectCardProps { image: string; type: string; title: string; description: string; tech: string; github: string; demo: string; }
+function ProjectCard({ image, type, title, description, tech, github, demo }: ProjectCardProps) {
   return (
-    <ProjectsContainer>
-      <h2>
-        <HeaderImg src={theme.themeName === 'light' ? workLight : workDark} /> Мои работы
-      </h2>
+    <Project whileHover={{ y: -4 }}>
+      <Preview src={image} alt={`Интерфейс проекта ${title}`} />
+      <Description>
+        <Label>{type}</Label><h3>{title}</h3><Copy>{description}</Copy>
+        <Links><LinkButton href={github} target="_blank" rel="noreferrer">GitHub</LinkButton><LinkButton href={demo} target="_blank" rel="noreferrer">Демо</LinkButton></Links>
+        <Tech><strong>Технологии:</strong> {tech}</Tech>
+      </Description>
+    </Project>
+  );
+}
 
-      <Ul>
-        <LiLeft whileHover={LiHover}>
-          <Img src={brando} alt="works-svg"></Img>
-          <DesciptionContainer>
-            <Desciption>
-              <ColoredP>&mdash; Веб-приложение </ColoredP>
-              <h3>Brando</h3>
-              <P>"Brando" – веб-приложение, где пользователи выполняют задания от партнеров (квизы, челленджи, покупки) и зарабатывают очки. Очки повышают уровень, открывая новые бонусы: скидки, эксклюзивные товары или реальные призы. Есть карта бонусов и магазин призов</P>
-            </Desciption>
-            <LinkContainer>
-              <AButton href="https://github.com/DDISB/Stainless-Hackathon/" target="_blank">GitHub</AButton>
-              <AButton href="https://ddisb.github.io/Stainless-Hackathon/" target="_blank">Демо</AButton>
-            </LinkContainer>
-          </DesciptionContainer>
-        </LiLeft>
-        
-        <LiRight whileHover={LiHover}>
-          <Img src={boldo} alt="works-svg"></Img>
-          <DesciptionContainer>
-            <ColoredP>&mdash; Одностраничный лэндинг </ColoredP>
-            <Desciption>
-              <h3>Boldo </h3>
-              <P>Boldo - это одностраничный лэндинг написанный и использованием HTML, CSS и JavaScript. Представляет собой страницу в строгом дизайне, а так же поддерживает адаптивную верстку для устройств с разным размером экранов.</P>
-            </Desciption> 
-            <LinkContainer>
-              <AButton href="https://github.com/DDISB/Boldo.github.io" target="_blank">GitHub</AButton>
-              <AButton href="https://ddisb.github.io/Boldo.github.io/" target="_blank">Демо</AButton>
-            </LinkContainer>
-          </DesciptionContainer>
-        </LiRight>
-      </Ul>
-    </ProjectsContainer>
+export default function Works() {
+  return (
+    <Container>
+      <h2>Мои работы</h2>
+      <List>
+        <ProjectCard image={brando} type="Веб-приложение" title="Brando" description="Платформа с заданиями от партнёров, системой очков, уровнями, картой бонусов и магазином призов." tech="React, TypeScript, адаптивная вёрстка, GitHub Pages" github="https://github.com/DDISB/Stainless-Hackathon/" demo="https://ddisb.github.io/Stainless-Hackathon/" />
+        {/* <ProjectCard image={boldo} type="Одностраничный лендинг" title="Boldo" description="Адаптивная промостраница в строгом стиле, созданная на HTML, CSS и JavaScript." tech="HTML, CSS, JavaScript, адаптивная вёрстка" github="https://github.com/DDISB/Boldo.github.io" demo="https://ddisb.github.io/Boldo.github.io/" /> */}
+      </List>
+    </Container>
   );
 }

@@ -1,39 +1,24 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
-const FooterContainer = styled.div`
-  width: 100%;
-  max-width: 1200px;
-  height: 5rem;
-  margin: 5rem auto 0;
-  border-top: 1px solid ${({ theme }) => theme.colors.text};
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const FooterContainer = styled.footer`
+  width: min(1120px, calc(100% - 2rem));
+  margin: 2rem auto 0;
+  padding: 2rem 0 3rem;
+  border-top: 1px solid ${({ theme }) => theme.colors.border};
 `;
 
 const ContentContainer = styled.div`
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  max-width: 800px;
-  height: 100%;
   display: flex;
   align-items: center;
-  flex-direction: row;
   justify-content: space-between;
 `;
 
 const P = styled.p`
-font-weight: 600;
-`
+  color: ${({ theme }) => theme.colors.muted};
+  font-size: 0.9rem;
+  font-weight: 600;
+`;
 
 export default function Footer() {
-  const year = new Date().getFullYear();
-  return (
-    <FooterContainer>
-      <ContentContainer>
-      <P>&#169; {year} / Демид Самылов</P>
-      </ContentContainer>
-    </FooterContainer>
-  )
+  return <FooterContainer><ContentContainer><P>© {new Date().getFullYear()} / Демид Самылов</P></ContentContainer></FooterContainer>;
 }

@@ -33,7 +33,7 @@ export const AnimatedContainer = ({
   transition = transitionContainerSettings,
   ...props
 }: Props, ) => (
-  <motion.li
+  <motion.div
     initial={initial}
     whileInView={whileInView}
     viewport={viewport}
@@ -41,5 +41,5 @@ export const AnimatedContainer = ({
     {...props}
   >
     {children}
-  </motion.li>
+  </motion.div>
 );

@@ -1,52 +1,28 @@
-import { useRef } from 'react';
 import { sections } from '../Nav/sections';
-import { Intro, About, Works, Skills, Contacts } from './Sections';
-import styled from "styled-components";
+import { Intro, About, Skills, Contacts } from './Sections';
+import styled from 'styled-components';
 
-const ContentContainer = styled.div`
-  margin-top: 7rem;
+const ContentContainer = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8rem;
   width: 100%;
 `;
 
 const Section = styled.section`
   width: 100%;
-  padding: 0;
-  padding-top: 7rem;
-  margin-top: -7rem;
-
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-`
+  padding: clamp(4.5rem, 9vw, 8rem) clamp(1rem, 4vw, 2rem);
+  scroll-margin-top: 4rem;
+`;
 
 export default function PageContent() {
-  const section1Ref = useRef(null);
-  const section2Ref = useRef(null);
   return (
     <ContentContainer>
-      <Section>
-        <Intro />
-      </Section>
-
-      <Section ref={section1Ref}  id={sections.about}>
-        <About />
-      </Section>
-
-      <Section ref={section2Ref}  id={sections.works}>
-        <Works />
-      </Section>
-
-      <Section ref={section2Ref}  id={sections.skills}>
-        <Skills />
-      </Section>
-
-      <Section ref={section2Ref}  id={sections.contacts}>
-        <Contacts />
-      </Section> 
+      <Section><Intro /></Section>
+      <Section id={sections.about}><About /></Section>
+      {/* <Section id={sections.works}><Works /></Section> */}
+      <Section id={sections.skills}><Skills /></Section>
+      <Section id={sections.contacts}><Contacts /></Section>
     </ContentContainer>
-  )
+  );
 }

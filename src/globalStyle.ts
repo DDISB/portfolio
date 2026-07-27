@@ -3,105 +3,165 @@ import { createGlobalStyle, type DefaultTheme } from 'styled-components';
 export const lightTheme: DefaultTheme = {
   themeName: 'light',
   colors: {
-    background: '#f4f8ffff',
-    primary: '#198cff',
-    secondary: '#e7e7e7ff',
-    headerBackground: '#00000000',
-    contrast: '#0a0a0b',
-    additional: '#8070f9ff',
-    text: '#0a0a0b',
+    background: '#f7f7fa',
+    surface: '#ffffff',
+    surfaceElevated: '#f0eff8',
+    border: '#dedde8',
+    primary: '#6d5ce7',
+    secondary: '#eeecf8',
+    headerBackground: 'rgba(247, 247, 250, 0.88)',
+    contrast: '#17161c',
+    additional: '#6d5ce7',
+    accentSoft: '#ebe8ff',
+    text: '#17161c',
+    muted: '#686672',
   },
 };
 
 export const darkTheme: DefaultTheme = {
   themeName: 'dark',
   colors: {
-    background: '#0a0a0b',
-    primary: '#0a0a0b',
-    secondary: '#171719ff',
-    headerBackground: '#00000000',
-    contrast: '#fff',
-    additional: '#8070f9ff',
-    text: '#f5f5f5',
+    background: '#0d0d10',
+    surface: '#151519',
+    surfaceElevated: '#1c1b22',
+    border: '#2b2a32',
+    primary: '#9585ff',
+    secondary: '#211f2d',
+    headerBackground: 'rgba(13, 13, 16, 0.86)',
+    contrast: '#f5f4f8',
+    additional: '#9585ff',
+    accentSoft: '#25213b',
+    text: '#f5f4f8',
+    muted: '#aaa7b3',
   },
 };
 
 export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
-  #root {
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: start;
-      width: 100%;
-      font-size: 16px;
-      font-family: "Nata Sans", sans-serif;;
-    }
-  
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
   body {
     margin: 0;
     min-width: 320px;
     min-height: 100vh;
-    transition: all 0.4s ease;
-    background-color: ${({ theme }) => theme.colors.background};
+    overflow-x: hidden;
+    background: ${({ theme }) => theme.colors.background};
     color: ${({ theme }) => theme.colors.text};
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-family: Inter, "Nata Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     font-size: 16px;
+    line-height: 1.65;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+
+  #root {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  ::selection {
+    color: ${({ theme }) => theme.colors.contrast};
+    background: ${({ theme }) => theme.colors.accentSoft};
+  }
+
+  h1, h2, h3 {
+    color: ${({ theme }) => theme.colors.text};
+    letter-spacing: -0.04em;
+    text-wrap: balance;
   }
 
   h1 {
-    font-size: 3.2em;
-    line-height: 1.1;
-    font-weight: 700;
+    font-size: clamp(2.75rem, 8vw, 6.5rem);
+    line-height: 0.98;
+    font-weight: 750;
   }
 
-
   h2 {
-    font-size: 3rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    font-size: clamp(2rem, 5vw, 3.5rem);
     line-height: 1.1;
-    font-weight: 700;
+    font-weight: 720;
   }
 
   h3 {
-    font-size: 2rem;
-    line-height: 1.1;
+    font-size: clamp(1.5rem, 3vw, 2.25rem);
+    line-height: 1.2;
     font-weight: 700;
   }
 
-  a {
-    color: ${({ theme }) => theme.colors.text};
+  p {
+    color: ${({ theme }) => theme.colors.muted};
   }
-  
+
+  a {
+    color: inherit;
+  }
+
+  :focus-visible {
+    outline: 3px solid ${({ theme }) => theme.colors.primary};
+    outline-offset: 3px;
+  }
+
+  .app-shell {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
   .theme-button {
-    color: #fff;
-    padding: 8px 16px;
-    border: none;
-    cursor: pointer;
     position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
+    z-index: 200;
+    top: 0.75rem;
+    right: max(1rem, calc((100vw - 1120px) / 2));
+    min-width: 6.5rem;
+    padding: 0.65rem 1rem;
+    border: 1px solid ${({ theme }) => theme.colors.border};
+    border-radius: 999px;
+    color: ${({ theme }) => theme.colors.text};
+    background: ${({ theme }) => theme.colors.surface};
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    font-size: 0.82rem;
+    font-weight: 700;
+    transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+  }
+
+  .theme-button:hover {
+    transform: translateY(-2px);
+    border-color: ${({ theme }) => theme.colors.primary};
+    background: ${({ theme }) => theme.colors.accentSoft};
   }
 
   .progress-bar {
     position: fixed;
+    z-index: 300;
     top: 0;
     left: 0;
     right: 0;
-    height: 2px;
-    z-index: 100;
-    background: ${({ theme }) => theme.colors.contrast};
+    height: 3px;
+    background: ${({ theme }) => theme.colors.primary};
     transform-origin: 0%;
-}
+  }
 
   @media (max-width: 600px) {
-    h2 {
-      font-size: 2rem;
-    }
+    body { font-size: 15px; }
     .theme-button {
-    color: ${({ theme }) => theme.colors.contrast};
+      top: 0.75rem;
+      right: 1rem;
+      min-width: auto;
+    }
   }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      scroll-behavior: auto !important;
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+    }
   }
 `;

@@ -1,72 +1,53 @@
-import { AnimatedContainer } from "@/lib/animations/AnimatedContainer";
-import styled from "styled-components";
-import useWindowWidth from '@lib/hooks/useWindowWidth';
-import Silk from "@/lib/components/ui/Silk";
+import { AnimatedContainer } from '@/lib/animations/AnimatedContainer';
+import styled from 'styled-components';
 
 const IntroContainer = styled(AnimatedContainer)`
-  position: relative;
-  min-height: 100vh;
-  width: 100%;
-
-  margin-top: -7rem;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  min-height: min(860px, 100vh);
+  max-width: 1120px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(260px, 0.65fr);
   align-items: center;
+  gap: clamp(2rem, 7vw, 6rem);
+  @media (max-width: 760px) { grid-template-columns: 1fr; min-height: auto; padding-top: 5rem; }
 `;
-
-const BackgroundBeamsContainer = styled.div`
-  width: 100%;
-  height: 100vh;
-  position: absolute;
-  overflow: 'hidden';
-  top: 0;
-  left: 0;
-  z-index: 0;
+const Copy = styled.div`display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem;`;
+const Eyebrow = styled.p`
+  display: inline-flex; align-items: center; gap: 0.65rem; color: ${({ theme }) => theme.colors.primary};
+  font-size: 0.85rem; font-weight: 750; letter-spacing: 0.12em; text-transform: uppercase;
+  &::before { content: ''; width: 2rem; height: 2px; background: currentColor; }
 `;
-
-const Wrapper = styled.div`
+const Title = styled.h1`max-width: 780px;`;
+const Lead = styled.p`max-width: 650px; font-size: clamp(1.05rem, 2vw, 1.3rem);`;
+const Portrait = styled.div`
+  aspect-ratio: 4 / 5;
+  width: min(100%, 340px);
+  justify-self: end;
+  display: grid;
+  place-items: center;
+  border: 1px solid ${({ theme }) => theme.colors.border};
+  border-radius: 2rem;
+  color: ${({ theme }) => theme.colors.primary};
+  background: ${({ theme }) => theme.colors.surface};
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.1);
+  font-size: clamp(4rem, 10vw, 7rem);
+  font-weight: 800;
+  letter-spacing: -0.08em;
+  overflow: hidden;
   position: relative;
-  width: 100%;
-  height: 100%;
+  &::after { content: 'Фото'; position: absolute; right: 1rem; bottom: 1rem; padding: 0.35rem 0.65rem; border-radius: 999px; background: ${({ theme }) => theme.colors.accentSoft}; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
+  @media (max-width: 760px) { justify-self: start; width: min(75%, 300px); }
 `;
 
-const H1 = styled.h1`
-  z-index: 10;
-  color: white;
-  text-align: center;
-  padding: 1rem;
-`;
-
-export default function() {
-  const width = useWindowWidth();
-
+export default function Intro() {
   return (
     <IntroContainer>
-      <H1>Привет, я Демид Самылов</H1>
-      <BackgroundBeamsContainer>
-        <Wrapper>
-          {width > 600 &&
-            <Silk
-              speed={3}
-              scale={1}
-              color="#514f60"
-              noiseIntensity={0.1}
-              rotation={0}
-            />
-          }
-          {width < 600 &&
-            <Silk
-              speed={3}
-              scale={0.8}
-              color="#514f60"
-              noiseIntensity={0.1}
-              rotation={0}
-            />
-          }
-        </Wrapper>
-      </BackgroundBeamsContainer>
+      <Copy>
+        <Eyebrow>Backend-разработчик</Eyebrow>
+        <Title>Привет, я Демид Самылов</Title>
+        <Lead>Разрабатываю серверную часть веб-приложений на Python и FastAPI: проектирую API, работаю с базами данных и интеграциями. При необходимости могу самостоятельно собрать клиентскую часть на TypeScript, React или Svelte.</Lead>
+      </Copy>
+      <Portrait aria-label="Место для фотографии Демида Самылова">ДС</Portrait>
     </IntroContainer>
   );
 }
