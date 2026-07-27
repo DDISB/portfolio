@@ -2,7 +2,7 @@ import { AnimatedContainer } from '@/lib/animations/AnimatedContainer';
 import styled from 'styled-components';
 import Css from '@/assets/skills/css3.svg';
 import Html from '@/assets/skills/html5.svg';
-import Javascript from '@/assets/skills/javascript.svg';
+import PythonSVG from '@/assets/skills/pythonsvg.svg';
 import Typescript from '@/assets/skills/typescript.svg';
 import ReactIcon from '@/assets/skills/react.svg';
 import Svelte from '@/assets/skills/Svelte.svg';
@@ -10,8 +10,8 @@ import Postgresql from '@/assets/skills/postgresql.svg';
 import Git from '@/assets/skills/git.svg';
 
 const skills = [
-  ['HTML', Html], ['CSS', Css], ['JavaScript', Javascript], ['TypeScript', Typescript],
-  ['React', ReactIcon], ['Svelte', Svelte], ['Git', Git], ['PostgreSQL', Postgresql],
+  ['Python', PythonSVG], ['TypeScript', Typescript], ['Git', Git], ['PostgreSQL', Postgresql],
+  ['HTML', Html], ['CSS', Css], ['React', ReactIcon], ['Svelte', Svelte], 
 ];
 
 const Container = styled(AnimatedContainer)`
