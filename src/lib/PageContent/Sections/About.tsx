@@ -1,8 +1,11 @@
 import { AnimatedContainer } from '@/lib/animations/AnimatedContainer';
+import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import boldo from '@/img/boldo.png';
 import viewer3d from '@/img/3dviewer.png';
 import diploma from '@/img/diplomav2.png';
+import stainlesshackathon from '@/img/stainlesshackathon.png';
 
 const Container = styled(AnimatedContainer)`max-width: 1120px; width: 100%; margin: 0 auto;`;
 const Block = styled.div`margin-top: clamp(4rem, 8vw, 7rem); &:first-of-type { margin-top: 2.5rem; }`;
@@ -56,15 +59,66 @@ const StudyProject = styled.li`
   display: grid; grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr); gap: 1.25rem; align-items: center;
   padding: 1rem; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 1rem;
   background: ${({ theme }) => theme.colors.surfaceElevated};
-  @media (max-width: 650px) { grid-template-columns: 1fr; }
+  @media (max-width: 650px) { grid-template-columns: 1fr; } 
 `;
-const Screenshot = styled.img`width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 0.8rem;`;
-const ProjectInfo = styled.div`display: flex; flex-direction: column; gap: 0.55rem;`;
-const ProjectTitle = styled.div`color: ${({ theme }) => theme.colors.text}; font-size: 1.15rem; font-weight: 750;`;
+const ScreenshotButton = styled.button`
+  display: block; width: 100%; padding: 0; border: 0; border-radius: 0.8rem; background: none;
+  @media (min-width: 651px) { cursor: zoom-in; }
+`;
+const Screenshot = styled.img`display: block; width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 0.8rem;`;
+const Lightbox = styled.div`
+  position: fixed; z-index: 1000; inset: 0; display: grid; place-items: center; padding: 2rem;
+  background: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); cursor: zoom-out;
+  @media (max-width: 650px) { display: none; }
+`;
+const LightboxImage = styled.img`
+  display: block; max-width: min(1400px, 94vw); max-height: 90vh; object-fit: contain;
+  border-radius: 0.8rem; box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45); cursor: default;
+`;
+const CloseLightbox = styled.button`
+  position: fixed; top: 1.25rem; right: 1.25rem; display: grid; place-items: center;
+  width: 2.75rem; height: 2.75rem; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 50%;
+  color: #fff; background: rgba(255, 255, 255, 0.1); font-size: 1.5rem; line-height: 1; cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease;
+  &:hover { background: rgba(255, 255, 255, 0.2); transform: scale(1.05); }
+`;
+const ProjectInfo = styled.div`display: flex; flex-direction: column; align-self: stretch; gap: 0.55rem; padding-top: 0.2rem;`;
+const ProjectTitle = styled.div`color: ${({ theme }) => theme.colors.text}; font-size: clamp(1.15rem, 2vw, 1.35rem); line-height: 1.25; font-weight: 750;`;
+const ProjectLinks = styled.div`display: flex; flex-wrap: wrap; gap: 0.65rem; margin-top: auto; padding-top: 0.75rem;`;
+const ProjectLink = styled.a`
+  display: inline-flex; align-items: center; justify-content: center; width: 9rem; padding: 0.65rem 1rem;
+  border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 0.8rem;
+  background: ${({ theme }) => theme.colors.surface};
+  color: ${({ theme }) => theme.colors.text}; font-size: 0.85rem; font-weight: 700; text-decoration: none;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease;
+  &:hover { border-color: ${({ theme }) => theme.colors.primary}; background: ${({ theme }) => theme.colors.surfaceElevated}; transform: translateY(-2px); }
+  @media (max-width: 650px) { width: 7rem; }
+`;
 
 export default function About() {
+  const [selectedImage, setSelectedImage] = useState<{ src: string; alt: string } | null>(null);
+
+  const openImage = (src: string, alt: string) => {
+    if (window.matchMedia('(min-width: 651px)').matches) setSelectedImage({ src, alt });
+  };
+
+  useEffect(() => {
+    if (!selectedImage) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') setSelectedImage(null);
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = 'hidden';
+    return () => {
+      document.removeEventListener('keydown', closeOnEscape);
+      document.body.style.overflow = previousOverflow;
+    };
+  }, [selectedImage]);
+
   return (
-    <Container>
+    <>
+      <Container>
       <h2>Обо мне</h2>
       <Intro>Специализируюсь на backend-разработке: проектирую API, серверную логику и работу с данными. Понимание frontend помогает мне видеть продукт целиком и эффективнее взаимодействовать с клиентской частью.</Intro>
       <Block>
@@ -81,21 +135,26 @@ export default function About() {
           <Summary><div><DetailTag>Образование</DetailTag><SummaryTitle>Вятский государственный университет</SummaryTitle><p>Бакалавриат: Информатика и вычислительная техника</p></div><Period>2022–2026</Period></Summary>
           <DetailContent>
             <Subheading>Полученные навыки</Subheading><Skills>{['Алгоритмы и структуры данных', 'Базы данных', 'Проектирование ПО', 'Веб-разработка', 'Разработка прикладного ПО', 'Проектирование цифровых устройств', 'Командная работа', 'Git'].map(skill => <Skill key={skill}>{skill}</Skill>)}</Skills>
-            <Subheading>Учебные проекты</Subheading>
+            <Subheading>Учебные и командные проекты</Subheading>
             <ProjectList>
               <StudyProject>
-                <Screenshot src={diploma} alt="Скриншот дипломный проект" />
-                  <ProjectInfo><ProjectTitle>Дипломный проект - 2025-2026</ProjectTitle><p>Разработка системы управления рецептурой продукта химического производства.</p></ProjectInfo>
+                <ScreenshotButton type="button" onClick={() => openImage(diploma, 'Скриншот дипломный проект')} aria-label="Увеличить изображение: Скриншот дипломный проект"><Screenshot src={diploma} alt="Скриншот дипломный проект" /></ScreenshotButton>
+                  <ProjectInfo><ProjectTitle>Дипломный проект - 2024-2025</ProjectTitle><p>Тема диплома: Разработка системы управления рецептурой продукта химического производства.</p></ProjectInfo>
               </StudyProject>
 
               <StudyProject>
-                <Screenshot src={viewer3d} alt="Скриншот проекта 3д просмотр" />
-                  <ProjectInfo><ProjectTitle>Собственный движок растеризации 3D-графики - 2023</ProjectTitle><p>Разработка программного 3D-рендерера и графической библиотеки с нуля. Реализованы загрузка полигональных моделей, проекции и преобразования, растеризация треугольников, расчёт освещения и удаление невидимых поверхностей с помощью Z-буфера.</p></ProjectInfo>
+                <ScreenshotButton type="button" onClick={() => openImage(stainlesshackathon, 'Скриншот хакатон 2025 Stainless')} aria-label="Увеличить изображение: Скриншот хакатон 2025 Stainless"><Screenshot src={stainlesshackathon} alt="Скриншот хакатон 2025 Stainless" /></ScreenshotButton>
+                  <ProjectInfo><ProjectTitle>Brando - 2025</ProjectTitle><p>Командный проект разработанный командой Stainless в качестве решения для хакатона Железно - май 2025.</p><ProjectLinks><ProjectLink href="https://ddisb.github.io/Stainless-Hackathon/" target="_blank" rel="noreferrer">Демо</ProjectLink><ProjectLink href="https://github.com/DDISB/Stainless-Hackathon" target="_blank" rel="noreferrer">GitHub</ProjectLink></ProjectLinks></ProjectInfo>
+              </StudyProject>
+
+              <StudyProject>
+                <ScreenshotButton type="button" onClick={() => openImage(viewer3d, 'Скриншот проекта 3д просмотр')} aria-label="Увеличить изображение: Скриншот проекта 3д просмотр"><Screenshot src={viewer3d} alt="Скриншот проекта 3д просмотр" /></ScreenshotButton>
+                  <ProjectInfo><ProjectTitle>Собственный движок растеризации 3D-графики - 2023</ProjectTitle><p>Разработка рограммного 3D-рендерера и графической библиотеки с нуля. Реализованы загрузка полигональных моделей, проекции и преобразования, растеризация треугольников, расчёт освещения и удаление невидимых поверхностей с помощью Z-буфера.</p></ProjectInfo>
               </StudyProject>
               
               <StudyProject>
-                <Screenshot src={boldo} alt="Скриншот проекта лендинг" />
-                <ProjectInfo><ProjectTitle>Лендинг - 2022</ProjectTitle><p>Адаптивный одностраничный сайт, созданный для практики семантической вёрстки, CSS и клиентского JavaScript.</p></ProjectInfo>
+                <ScreenshotButton type="button" onClick={() => openImage(boldo, 'Скриншот проекта лендинг')} aria-label="Увеличить изображение: Скриншот проекта лендинг"><Screenshot src={boldo} alt="Скриншот проекта лендинг" /></ScreenshotButton>
+                <ProjectInfo><ProjectTitle>Лендинг - 2022</ProjectTitle><p>Адаптивный одностраничный сайт, созданный для практики семантической вёрстки, CSS и клиентского JavaScript.</p><ProjectLinks><ProjectLink href="https://ddisb.github.io/Boldo.github.io/" target="_blank" rel="noreferrer">Демо</ProjectLink></ProjectLinks></ProjectInfo>
               </StudyProject>
             </ProjectList>
           </DetailContent>
@@ -134,6 +193,14 @@ export default function About() {
           </StaticSummary>
         </StaticDetails>
       </Block>
-    </Container>
+      </Container>
+      {selectedImage && createPortal(
+        <Lightbox role="dialog" aria-modal="true" aria-label="Увеличенный просмотр изображения" onClick={() => setSelectedImage(null)}>
+          <CloseLightbox type="button" onClick={() => setSelectedImage(null)} aria-label="Закрыть">×</CloseLightbox>
+          <LightboxImage src={selectedImage.src} alt={selectedImage.alt} onClick={event => event.stopPropagation()} />
+        </Lightbox>,
+        document.body,
+      )}
+    </>
   );
 }

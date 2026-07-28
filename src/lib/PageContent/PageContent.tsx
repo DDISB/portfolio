@@ -1,5 +1,5 @@
 import { sections } from '../Nav/sections';
-import { Intro, About, Skills, Contacts } from './Sections';
+import { Intro, About, Achievements, Skills, Contacts } from './Sections';
 import styled from 'styled-components';
 
 const ContentContainer = styled.main`
@@ -21,6 +21,7 @@ export default function PageContent() {
       <Section><Intro /></Section>
       <Section id={sections.about}><About /></Section>
       {/* <Section id={sections.works}><Works /></Section> */}
+      <Section id={sections.achievements}><Achievements /></Section>
       <Section id={sections.skills}><Skills /></Section>
       <Section id={sections.contacts}><Contacts /></Section>
     </ContentContainer>
