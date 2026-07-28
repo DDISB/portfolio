@@ -1,7 +1,8 @@
 import { AnimatedContainer } from '@/lib/animations/AnimatedContainer';
 import styled from 'styled-components';
-import brando from '@/img/brando.png';
 import boldo from '@/img/boldo.png';
+import viewer3d from '@/img/3dviewer.png';
+import diploma from '@/img/diplomav2.png';
 
 const Container = styled(AnimatedContainer)`max-width: 1120px; width: 100%; margin: 0 auto;`;
 const Block = styled.div`margin-top: clamp(4rem, 8vw, 7rem); &:first-of-type { margin-top: 2.5rem; }`;
@@ -21,17 +22,29 @@ const Details = styled.details`
 const Summary = styled.summary`
   position: relative; display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.5rem 4rem 1.5rem 1.5rem;
   cursor: pointer; list-style: none; &::-webkit-details-marker { display: none; }
-  &::after { content: '+'; position: absolute; right: 1.5rem; top: 50%; translate: 0 -50%; color: ${({ theme }) => theme.colors.primary}; font-size: 1.7rem; font-weight: 400; }
+  &::after {
+    content: '+'; position: absolute; right: 1.5rem; top: 0; bottom: 0;
+    display: flex; align-items: center; line-height: 1;
+    color: ${({ theme }) => theme.colors.primary}; font-size: 1.7rem; font-weight: 400;
+  }
   details[open] &::after { content: '−'; }
   @media (max-width: 600px) { grid-template-columns: 1fr; }
 `;
+const StaticDetails = styled.article`
+  margin-top: 1rem; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 1.25rem;
+  background: ${({ theme }) => theme.colors.surface}; overflow: hidden; transition: border-color 0.2s ease;
+  &:hover { border-color: ${({ theme }) => theme.colors.primary}; }
+`;
+const StaticSummary = styled.div`
+  display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.5rem;
+  @media (max-width: 600px) { grid-template-columns: 1fr; }
+`;
 const SummaryTitle = styled.h3`font-size: 1.3rem; letter-spacing: -0.02em;`;
-const Period = styled.p`white-space: nowrap; color: ${({ theme }) => theme.colors.primary}; font-weight: 700;`;
+const Period = styled.p`align-self: center; white-space: nowrap; color: ${({ theme }) => theme.colors.primary}; font-weight: 700;`;
 const DetailContent = styled.div`padding: 0 1.5rem 1.5rem; border-top: 1px solid ${({ theme }) => theme.colors.border};`;
 const Subheading = styled.h4`margin-top: 1.5rem; color: ${({ theme }) => theme.colors.text}; font-size: 0.85rem; letter-spacing: 0.08em; text-transform: uppercase;`;
 const Skills = styled.ul`display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 0.8rem; list-style: none;`;
 const Skill = styled.li`padding: 0.45rem 0.75rem; border-radius: 999px; color: ${({ theme }) => theme.colors.primary}; background: ${({ theme }) => theme.colors.accentSoft}; font-size: 0.85rem; font-weight: 700;`;
-const Tasks = styled.ul`display: grid; gap: 0.6rem; margin-top: 0.8rem; padding-left: 1.2rem; color: ${({ theme }) => theme.colors.muted};`;
 const ProjectList = styled.ul`display: grid; gap: 1rem; margin-top: 1rem; padding: 0; list-style: none;`;
 const StudyProject = styled.li`
   display: grid; grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr); gap: 1.25rem; align-items: center;
@@ -41,7 +54,7 @@ const StudyProject = styled.li`
 `;
 const Screenshot = styled.img`width: 100%; aspect-ratio: 16 / 10; object-fit: cover; object-position: top; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 0.8rem;`;
 const ProjectInfo = styled.div`display: flex; flex-direction: column; gap: 0.55rem;`;
-const ProjectTitle = styled.h4`color: ${({ theme }) => theme.colors.text}; font-size: 1.15rem; font-weight: 750;`;
+const ProjectTitle = styled.div`color: ${({ theme }) => theme.colors.text}; font-size: 1.15rem; font-weight: 750;`;
 
 export default function About() {
   return (
@@ -57,28 +70,39 @@ export default function About() {
         </Grid>
       </Block>
       <Block>
-        <h2>Образование и работа</h2>
+        <h2>Образование</h2>
         <Details>
           <Summary><div><SummaryTitle>Вятский государственный университет</SummaryTitle><p>Бакалавриат: Информатика и вычислительная техника</p></div><Period>2022–2026</Period></Summary>
           <DetailContent>
             <Subheading>Полученные навыки</Subheading><Skills>{['Алгоритмы и структуры данных', 'Базы данных', 'Проектирование ПО', 'Веб-разработка', 'Разработка прикладного ПО', 'Проектирование цифровых устройств', 'Командная работа', 'Git'].map(skill => <Skill key={skill}>{skill}</Skill>)}</Skills>
-            <Subheading>Учебные и командные проекты</Subheading>
+            <Subheading>Учебные проекты</Subheading>
             <ProjectList>
               <StudyProject>
-                <Screenshot src={brando} alt="Скриншот проекта Brando" />
-                <ProjectInfo><ProjectTitle>Brando</ProjectTitle><p>Командное веб-приложение с заданиями от партнёров, системой очков, уровнями пользователей и каталогом наград.</p></ProjectInfo>
+                <Screenshot src={diploma} alt="Скриншот дипломный проект" />
+                  <ProjectInfo><ProjectTitle>Дипломный проект - 2024-2026</ProjectTitle><p>Разработка системы управления рецептурой продукта химического производства.</p></ProjectInfo>
               </StudyProject>
+
               <StudyProject>
-                <Screenshot src={boldo} alt="Скриншот проекта Boldo" />
-                <ProjectInfo><ProjectTitle>Boldo</ProjectTitle><p>Адаптивный одностраничный сайт, созданный для практики семантической вёрстки, CSS и клиентского JavaScript.</p></ProjectInfo>
+                <Screenshot src={viewer3d} alt="Скриншот проекта 3д просмотр" />
+                  <ProjectInfo><ProjectTitle>Собственный движок растеризации 3D-графики - 2023</ProjectTitle><p>Разработка программного 3D-рендерера и графической библиотеки с нуля. Реализованы загрузка полигональных моделей, проекции и преобразования, растеризация треугольников, расчёт освещения и удаление невидимых поверхностей с помощью Z-буфера.</p></ProjectInfo>
+              </StudyProject>
+              
+              <StudyProject>
+                <Screenshot src={boldo} alt="Скриншот проекта лендинг" />
+                <ProjectInfo><ProjectTitle>Лендинг - 2022</ProjectTitle><p>Адаптивный одностраничный сайт, созданный для практики семантической вёрстки, CSS и клиентского JavaScript.</p></ProjectInfo>
               </StudyProject>
             </ProjectList>
           </DetailContent>
         </Details>
-        <Details>
-          <Summary><div><SummaryTitle>Научно-исследовательская группа</SummaryTitle><p>Веб-разработчик</p></div><Period>2024–2025</Period></Summary>
-          <DetailContent><Subheading>Задачи и вклад</Subheading><Tasks><li>Проектирование интерфейсов системы сбора производственных данных.</li><li>Разработка приложения на SvelteKit и интеграция с GraphQL API.</li><li>Работа с PostgreSQL и KeystoneJS.</li><li>Подготовка интерфейсов анализа данных для сотрудников предприятия.</li></Tasks></DetailContent>
-        </Details>
+        <StaticDetails>
+          <StaticSummary>
+            <div>
+              <SummaryTitle>Диплом о профессиональной переподготовке</SummaryTitle>
+              <p>Разработка прикладных решений с применением искусственного инетллекта</p>
+            </div>
+            <Period>2026</Period>
+          </StaticSummary>
+        </StaticDetails>
       </Block>
     </Container>
   );

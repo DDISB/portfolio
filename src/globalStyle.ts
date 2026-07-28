@@ -123,7 +123,6 @@ export const GlobalStyles = createGlobalStyle<{ theme: DefaultTheme }>`
     border-radius: 999px;
     color: ${({ theme }) => theme.colors.text};
     background: ${({ theme }) => theme.colors.surface};
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
     font-size: 0.82rem;
     font-weight: 700;
     transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
