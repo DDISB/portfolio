@@ -20,7 +20,7 @@ const Details = styled.details`
   &:hover, &[open] { border-color: ${({ theme }) => theme.colors.primary}; }
 `;
 const Summary = styled.summary`
-  position: relative; display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.5rem 4rem 1.5rem 1.5rem;
+  position: relative; display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 0.75rem 4rem 1.5rem 1.5rem;
   cursor: pointer; list-style: none; &::-webkit-details-marker { display: none; }
   &::after {
     content: '+'; position: absolute; right: 1.5rem; top: 0; bottom: 0;
@@ -32,12 +32,18 @@ const Summary = styled.summary`
 `;
 const StaticDetails = styled.article`
   margin-top: 1rem; border: 1px solid ${({ theme }) => theme.colors.border}; border-radius: 1.25rem;
-  background: ${({ theme }) => theme.colors.surface}; overflow: hidden; transition: border-color 0.2s ease;
+  background: ${({ theme }) => theme.colors.surface}; overflow: hidden; transition: borde r-color 0.2s ease;
   &:hover { border-color: ${({ theme }) => theme.colors.primary}; }
 `;
 const StaticSummary = styled.div`
-  display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 1.5rem;
+  display: grid; grid-template-columns: 1fr auto; gap: 1rem; padding: 0.75rem 1.5rem 1.5rem;
   @media (max-width: 600px) { grid-template-columns: 1fr; }
+`;
+const DetailTag = styled.span`
+  display: inline-flex; width: fit-content; margin-bottom: 0.55rem; padding: 0.2rem 0.55rem;
+  border-radius: 999px; color: ${({ theme }) => theme.colors.muted};
+  background: color-mix(in srgb, ${({ theme }) => theme.colors.muted} 12%, transparent);
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1.35;
 `;
 const SummaryTitle = styled.h3`font-size: 1.3rem; letter-spacing: -0.02em;`;
 const Period = styled.p`align-self: center; white-space: nowrap; color: ${({ theme }) => theme.colors.primary}; font-weight: 700;`;
@@ -70,16 +76,16 @@ export default function About() {
         </Grid>
       </Block>
       <Block>
-        <h2>Образование</h2>
+        <h2>Образование и работа</h2>
         <Details>
-          <Summary><div><SummaryTitle>Вятский государственный университет</SummaryTitle><p>Бакалавриат: Информатика и вычислительная техника</p></div><Period>2022–2026</Period></Summary>
+          <Summary><div><DetailTag>Образование</DetailTag><SummaryTitle>Вятский государственный университет</SummaryTitle><p>Бакалавриат: Информатика и вычислительная техника</p></div><Period>2022–2026</Period></Summary>
           <DetailContent>
             <Subheading>Полученные навыки</Subheading><Skills>{['Алгоритмы и структуры данных', 'Базы данных', 'Проектирование ПО', 'Веб-разработка', 'Разработка прикладного ПО', 'Проектирование цифровых устройств', 'Командная работа', 'Git'].map(skill => <Skill key={skill}>{skill}</Skill>)}</Skills>
             <Subheading>Учебные проекты</Subheading>
             <ProjectList>
               <StudyProject>
                 <Screenshot src={diploma} alt="Скриншот дипломный проект" />
-                  <ProjectInfo><ProjectTitle>Дипломный проект - 2024-2026</ProjectTitle><p>Разработка системы управления рецептурой продукта химического производства.</p></ProjectInfo>
+                  <ProjectInfo><ProjectTitle>Дипломный проект - 2025-2026</ProjectTitle><p>Разработка системы управления рецептурой продукта химического производства.</p></ProjectInfo>
               </StudyProject>
 
               <StudyProject>
@@ -94,11 +100,35 @@ export default function About() {
             </ProjectList>
           </DetailContent>
         </Details>
+
         <StaticDetails>
           <StaticSummary>
             <div>
+              <DetailTag>Образование</DetailTag>
               <SummaryTitle>Диплом о профессиональной переподготовке</SummaryTitle>
               <p>Разработка прикладных решений с применением искусственного инетллекта</p>
+            </div>
+            <Period>2026</Period>
+          </StaticSummary>
+        </StaticDetails>
+
+        <StaticDetails>
+          <StaticSummary>
+            <div>
+              <DetailTag>Работа</DetailTag>
+              <SummaryTitle>Научно-исследовательская деятельность</SummaryTitle>
+              <p>Лаборант-исследователь. Временный научный коллектив в целях реализации научного проекта Проектирование и оптимизация нейронной сети для решения прямой задачи в отношении входных параметров и выходных характеристик резиновых смесей и резин</p>
+            </div>
+            <Period>2024-2025</Period>
+          </StaticSummary>
+        </StaticDetails>
+
+        <StaticDetails>
+          <StaticSummary>
+            <div>
+              <DetailTag>Работа</DetailTag>
+              <SummaryTitle>Ведущий инженер</SummaryTitle>
+              <p>КОГБУ Центр стратегического развития информационных ресурсов и систем управления</p>
             </div>
             <Period>2026</Period>
           </StaticSummary>
