@@ -11,7 +11,17 @@ const IntroContainer = styled(AnimatedContainer)`
   gap: clamp(2rem, 7vw, 6rem);
   @media (max-width: 760px) { grid-template-columns: 1fr; min-height: auto; padding-top: 5rem; }
 `;
-const Copy = styled.div`display: flex; flex-direction: column; align-items: flex-start; gap: 1.5rem;`;
+const Copy = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+
+  @media (max-width: 760px) {
+    align-items: center;
+    text-align: center;
+  }
+`;
 const Eyebrow = styled.p`
   display: inline-flex; align-items: center; gap: 0.65rem; color: ${({ theme }) => theme.colors.primary};
   font-size: 0.85rem; font-weight: 750; letter-spacing: 0.12em; text-transform: uppercase;
