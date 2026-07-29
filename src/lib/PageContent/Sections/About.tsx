@@ -120,13 +120,22 @@ export default function About() {
     <>
       <Container>
       <h2>Обо мне</h2>
-      <Intro>Специализируюсь на backend-разработке: проектирую API, серверную логику и работу с данными. Понимание frontend помогает мне видеть продукт целиком и эффективнее взаимодействовать с клиентской частью.</Intro>
+      <Intro>Я инженер программист, специализируюсь на веб разработке. </Intro>
       <Block>
         <h2>Чем я могу быть полезен</h2>
         <Grid>
-          <Achievement><AchievementTitle>Backend-сервисы</AchievementTitle><p>Разрабатываю серверную логику на Python и FastAPI, разделяя приложение на понятные и поддерживаемые компоненты.</p></Achievement>
-          <Achievement><AchievementTitle>API и данные</AchievementTitle><p>Проектирую API, интегрирую внешние сервисы и организую надёжную работу приложения с базами данных.</p></Achievement>
-          <Achievement><AchievementTitle>Задача целиком</AchievementTitle><p>Погружаюсь в бизнес-контекст, предлагаю техническое решение и последовательно довожу его до работающего продукта.</p></Achievement>
+          <Achievement>
+            <AchievementTitle>Проектирование</AchievementTitle>
+            <p>Проектирую струкутуру приложений, баз данных, API. Настраиваю интеграции с внешними сервисами.</p>
+          </Achievement>
+          <Achievement>
+            <AchievementTitle>Разработка</AchievementTitle>
+            <p>Разрабатываю веб-приложения и пишу чистый, понятный и поддерживаемый код.</p>
+          </Achievement>
+          <Achievement>
+            <AchievementTitle>Работа с бизнес-задачами</AchievementTitle>
+            <p>Погружаюсь в бизнес-контекст, предлагаю технические решения и довожу задачи до работающего результата.</p>
+          </Achievement>
         </Grid>
       </Block>
       <Block>

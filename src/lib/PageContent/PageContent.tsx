@@ -11,7 +11,7 @@ const ContentContainer = styled.main`
 
 const Section = styled.section`
   width: 100%;
-  padding: clamp(4.5rem, 9vw, 8rem) clamp(1rem, 4vw, 2rem);
+  padding: clamp(4.5rem, 9vw, 4rem) clamp(1rem, 4vw, 2rem);
   scroll-margin-top: 4rem;
 `;
 
@@ -20,7 +20,6 @@ export default function PageContent() {
     <ContentContainer>
       <Section><Intro /></Section>
       <Section id={sections.about}><About /></Section>
-      {/* <Section id={sections.works}><Works /></Section> */}
       <Section id={sections.achievements}><Achievements /></Section>
       <Section id={sections.skills}><Skills /></Section>
       <Section id={sections.contacts}><Contacts /></Section>

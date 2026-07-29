@@ -31,7 +31,6 @@ export default function Header() {
     <HeaderContainer>
       <HeaderContent aria-label="Навигация по странице">
         <NavButton text="Обо мне" sectionId={sections.about} />
-        <NavButton text="Работы" sectionId={sections.works} />
         <NavButton text="Достижения" sectionId={sections.achievements} />
         <NavButton text="Навыки" sectionId={sections.skills} />
         <NavButton text="Контакты" sectionId={sections.contacts} />

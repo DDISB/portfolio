@@ -18,7 +18,6 @@ const Eyebrow = styled.p`
   &::before { content: ''; width: 2rem; height: 2px; background: currentColor; }
 `;
 const Title = styled.h1`max-width: 780px;`;
-const Lead = styled.p`max-width: 650px; font-size: clamp(1.05rem, 2vw, 1.3rem);`;
 const Portrait = styled.div`
   aspect-ratio: 4 / 5;
   width: min(100%, 340px);
@@ -36,7 +35,7 @@ const Portrait = styled.div`
   overflow: hidden;
   position: relative;
   &::after { content: 'Фото'; position: absolute; right: 1rem; bottom: 1rem; padding: 0.35rem 0.65rem; border-radius: 999px; background: ${({ theme }) => theme.colors.accentSoft}; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
-  @media (max-width: 760px) { justify-self: start; width: min(75%, 300px); }
+  @media (max-width: 760px) { justify-self: center; width: min(75%, 300px); }
 `;
 
 export default function Intro() {
@@ -45,7 +44,6 @@ export default function Intro() {
       <Copy>
         <Eyebrow>Backend-разработчик</Eyebrow>
         <Title>Привет, я Демид Самылов</Title>
-        <Lead>Разрабатываю серверную часть веб-приложений на Python и FastAPI: проектирую API, работаю с базами данных и интеграциями. При необходимости могу самостоятельно собрать клиентскую часть на TypeScript, React или Svelte.</Lead>
       </Copy>
       <Portrait aria-label="Место для фотографии Демида Самылова">ДС</Portrait>
     </IntroContainer>
