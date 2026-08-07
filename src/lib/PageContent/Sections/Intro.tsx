@@ -1,4 +1,5 @@
 import { AnimatedContainer } from '@/lib/animations/AnimatedContainer';
+import portrait from '@/img/portrait1.png';
 import styled from 'styled-components';
 
 const IntroContainer = styled(AnimatedContainer)`
@@ -28,23 +29,18 @@ const Eyebrow = styled.p`
   &::before { content: ''; width: 2rem; height: 2px; background: currentColor; }
 `;
 const Title = styled.h1`max-width: 780px;`;
-const Portrait = styled.div`
+const Portrait = styled.img`
   aspect-ratio: 4 / 5;
   width: min(100%, 340px);
   justify-self: end;
-  display: grid;
-  place-items: center;
+  display: block;
+  object-fit: cover;
   border: 1px solid ${({ theme }) => theme.colors.border};
   border-radius: 2rem;
   color: ${({ theme }) => theme.colors.primary};
   background: ${({ theme }) => theme.colors.surface};
   box-shadow: 0 24px 70px rgba(0, 0, 0, 0.1);
-  font-size: clamp(4rem, 10vw, 7rem);
-  font-weight: 800;
-  letter-spacing: -0.08em;
   overflow: hidden;
-  position: relative;
-  &::after { content: 'Фото'; position: absolute; right: 1rem; bottom: 1rem; padding: 0.35rem 0.65rem; border-radius: 999px; background: ${({ theme }) => theme.colors.accentSoft}; font-size: 0.7rem; letter-spacing: 0.08em; text-transform: uppercase; }
   @media (max-width: 760px) { justify-self: center; width: min(75%, 300px); }
 `;
 
@@ -55,7 +51,7 @@ export default function Intro() {
         <Eyebrow>Backend-разработчик</Eyebrow>
         <Title>Привет, я Демид Самылов</Title>
       </Copy>
-      <Portrait aria-label="Место для фотографии Демида Самылова">ДС</Portrait>
+      <Portrait src={portrait} alt="Демид Самылов" />
     </IntroContainer>
   );
 }
